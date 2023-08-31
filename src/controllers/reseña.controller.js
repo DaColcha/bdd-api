@@ -1,27 +1,28 @@
 import getConnection from '../database.js'
 
-const getReseña = async (req, res) => {    
+export const getReseña = async (req, res) => {    
     const pool = await getConnection()
     const result = await pool.request()
             .query('SELECT num_reseña, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña')
     res.json(result.recordset)
 }
 
-// export const createReseña = async (req, res) => {  
-//     const {name, email} = req.body;
-//     const response: QueryResult = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]);
+export const createReseña = async (req, res) => {  
+    const {cod, cc, desc, calif, fecha} = req.body;
+    const pool = await getConnection()
+    const result = await pool
+            .query('INSERT INTO Reseña (cod_pelicula, cc_socio, descripcion, calificacion, fecha) VALUES ($1, $2, $3, $4, $5, $6)', [num, cod, cc, desc, calif, fecha]);
   
-//     return res.json({
-//       message: 'User Created successfully',
-//       body: {
-//         user: {
-//           name,
-//           email
-//         }
-//       }
-//     })
+    return res.json({
+      message: 'Reseña Created successfully',
+      body: {
+        user: {
+          cod, cc, desc, calif, fecha
+        }
+      }
+    })
   
-//   }
+  }
   
 //   export const updateUser = async (req: Request, res: Response): Promise<Response>=> {
 //     const id: number = parseInt(req.params.id);
