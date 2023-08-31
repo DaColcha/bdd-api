@@ -4,7 +4,7 @@ const dbSettings = {
     user: 'sa',
     password: 'P@ssw0rd',
     server: 'COLCHAD\\MSSQLSERVER16',
-    database: 'test', 
+    database: 'globguster_GYE', 
     options: {
         encrypt: true,
         trustServerCertificate: true

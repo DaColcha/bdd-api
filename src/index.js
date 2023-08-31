@@ -1,5 +1,5 @@
 import express from 'express'
-import empsRoutes from './routes/emps.routes.js'
+import reseñaRoutes from './routes/reseña.routes.js'
 
 const app = express()
 
@@ -7,7 +7,7 @@ const app = express()
 app.use(express.json());
 
 //routes
-app.use(empsRoutes);
+app.use(reseñaRoutes);
 
 app.listen(4000)
 console.log('Server running on port', 4000);

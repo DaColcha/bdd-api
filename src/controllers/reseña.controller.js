@@ -1,12 +1,13 @@
 import getConnection from '../database.js'
 
-export const getEmps = async (req, res) => {    
+const getReseña = async (req, res) => {    
     const pool = await getConnection()
-    const result = await pool.request().query('SELECT * FROM Emps')
+    const result = await pool.request()
+            .query('SELECT num_reseña, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña')
     res.json(result.recordset)
 }
 
-// export const createUser = async (req: Request, res: Response): Promise<Response>=> {
+// export const createReseña = async (req, res) => {  
 //     const {name, email} = req.body;
 //     const response: QueryResult = await pool.query('INSERT INTO users (name, email) VALUES ($1, $2)', [name, email]);
   
