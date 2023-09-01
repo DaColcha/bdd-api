@@ -4,7 +4,7 @@ export const getPelicula = async (req, res) => {
     const pool = await getConnection()
     const result = await pool.request()
             .query('SELECT cod_peli, titulo, cod_dir, nacionalidad, productora, fecha_estreno FROM Reseña')
-    res.json(result.recordset)
+    return res.json(result.recordset)
 }
 
 export const createPelicula = async (req, res) => {

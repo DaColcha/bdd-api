@@ -4,7 +4,7 @@ export const getAgencia = async (req, res) => {
     const pool = await getConnection()
     const result = await pool.request()
             .query('SELECT cod_agencia, ciudad_agencia, direccion_agencia FROM Agencia')
-    res.json(result.recordset)
+    return res.json(result.recordset)
 }
 
 export const createAgencia = async (req, res) => {
