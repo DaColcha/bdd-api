@@ -28,7 +28,7 @@ export const createEmpleado = async (req, res) => {
     const {cod_empleado, nombre, salario, cargo, cod_agencia, ciudad} = req.body;
     const pool = await getConnection()
 
-    const result= await pool.query('UPDATE Empleado set nombre=$1, salario=$2, cargo$3 WHERE (cod_empleado = $4 AND cod_agencia = $5 AND ciudad = $6)', [ nombre, salario, cargo, cod_empleado, cod_agencia, ciudad ]);
+    const result= await pool.query('UPDATE Empleado set nombre=$1, salario=$2, cargo=$3 WHERE (cod_empleado = $4 AND cod_agencia = $5 AND ciudad = $6)', [ nombre, salario, cargo, cod_empleado, cod_agencia, ciudad ]);
   
     return res.json(`Employee ${cc} updated Successfully`)
   }
