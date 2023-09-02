@@ -3,9 +3,12 @@ import { getSocio, createSocio, updateSocio, deleteSocio } from '../controllers/
 
 const router = Router()
 
-router.get('/socio', getSocio)
-router.post('/socio', createSocio)
-router.put('/socio/:cc', updateSocio)
-router.delete('/socio/:cc', deleteSocio)
+const useRoutesSocio = (app) => {
+    app.use('/glob-guster', router)
+    router.get('/socio', getSocio)
+    router.post('/socio', createSocio)
+    router.put('/socio/:cc', updateSocio)
+    router.delete('/socio/:cc', deleteSocio)
+}
 
-export default router
+export default useRoutesSocio
