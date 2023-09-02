@@ -1,4 +1,5 @@
 import getConnection from '../database.js'
+import sql from 'mssql'
 
 export const getSocio = async (req, res) => {    
     const pool = await getConnection()
@@ -9,9 +10,17 @@ export const getSocio = async (req, res) => {
 
 export const createSocio = async (req, res) => {  
     const {cc, nombre, telf, ciudad, direccion, garante} = req.body;
+    
     const pool = await getConnection()
-    const result = await pool
-            .query('INSERT INTO Socio (cc, nombre, telf, ciudad, direccion, garante) VALUES ($1, $2, $3, $4, $5, $6)', [cc, nombre, telf, ciudad, direccion, garante]);
+    await pool
+      .request()
+      .input('cc', sql.Char, cc)
+      .input('nombre', sql.VarChar, nombre)
+      .input('telf', sql.Char, telf)
+      .input('ciudad', sql.VarChar, ciudad)
+      .input('direccion', sql.VarChar, direccion)
+      .input('garante', sql.Char, garante)  
+      .query('INSERT INTO Socio (cc, nombre, telf, ciudad, direccion, garante) VALUES (@cc, @nombre, @telf, @ciudad, @direccion, @garante)');
   
     return res.json({
       message: 'Socio Created successfully',
