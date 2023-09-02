@@ -22,24 +22,14 @@ export const createEjemplar_info = async (req, res) => {
       }
     })
   
-  }
+}
   
-//   export const updateEjemplar_info = async (req, res) => {  
-//     const {num, desc, calif} = req.body;
-//     const pool = await getConnection()
+export const deleteEjemplar_info = async (req, res)=> {
+  const num= parseInt(req.params.num);
 
-//     const response= await pool.query('UPDATE Reseña set descripcion= $1, calificacion=$2, fecha=  CONVERT(Date, GETDATE()) WHERE num_reseña = $3', [desc, calif, num ]);
-  
-//     return res.json(`Reseña ${num} updated Successfully`)
-//   }
-  
+    const response = await pool.query(
+                      'DELETE FROM Ejemplar_info WHERE num = $1 and ciudad = quito', [num]);
 
-//   export const deleteReseña = async (req, res)=> {
-//     const num= parseInt(req.params.num);
-  
-//       const response = await pool.query(
-//                         'DELETE FROM Reseña WHERE num = $1', [num]);
+    return res.json(`Reseña ${num} deleted Successfully`);
 
-//       return res.json(`Reseña ${num} deleted Successfully`);
-  
-//   }
+}
