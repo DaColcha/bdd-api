@@ -8,18 +8,14 @@ export const getReseña = async (req, res) => {
 }
 
 export const createReseña = async (req, res) => {  
-    const {cod, cc, desc, calif} = req.body;
+    const {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
     const pool = await getConnection()
     const result = await pool
-            .query('INSERT INTO Reseña (cod_pelicula, cc_socio, descripcion, calificacion, fecha) VALUES ($1, $2, $3, $4, CONVERT(Date, GETDATE()))', [cod, cc, desc, calif]);
+            .query('INSERT INTO Reseña (num_reseña, cod_pelicula, cc_socio, descripcion, calificacion, fecha) VALUES ($1, $2, $3, $4,$5, CONVERT(Date, GETDATE()))', [num_reseña,cod_pelicula, cc_socio, descripcion, calificacion]);
   
     return res.json({
       message: 'Reseña Created successfully',
-      body: {
-        user: {
-          cod, cc, desc, calif, fecha
-        }
-      }
+      body: result
     })
   
   }

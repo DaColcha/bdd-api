@@ -1,11 +1,10 @@
 import sql from 'mssql'
-import config from './config'
 
 const dbSettings = {
     user: 'sa',
     password: 'P@ssw0rd',
-    server: config.server,
-    database: config.database, 
+    server: 'DESKTOP-QBB9M7S\\MSSQLSERVER2',
+    database: 'globguster_DMQ', 
     options: {
         encrypt: true,
         trustServerCertificate: true
