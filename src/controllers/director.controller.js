@@ -39,7 +39,7 @@ export const updateDirector = async (req, res) => {
     })  
 }
 
-export const deleteActor = async (req, res) => {
+export const deleteDirector = async (req, res) => {
     const {cod_director} = req.body;
     const pool = await getConnection()
     const result = await pool
