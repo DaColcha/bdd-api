@@ -1,5 +1,5 @@
 import Router from 'express'
-import {getAgencia, createAgencia , updateAgencia } from '../controllers/agencia.controller.js'
+import {getAgencia, createAgencia , updateAgencia, deleteAgencia } from '../controllers/agencia.controller.js'
 
 const router = Router()
 
