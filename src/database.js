@@ -1,5 +1,4 @@
 import sql from 'mssql'
-import config from './config'
 
 const dbSettings = {
     user: 'sa',
