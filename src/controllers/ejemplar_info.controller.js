@@ -8,16 +8,24 @@ export const getEjemplar_info = async (req, res) => {
 }
 
 export const createEjemplar_info = async (req, res) => {  
-    const {cod_pel, cod_ag} = req.body;
+    const {num_ejemplar, cod_pelicula, cod_agencia} = req.body;
     const pool = await getConnection()
-    const result = await pool
-            .query('INSERT INTO Ejemplar_info (cod_pelicula, cod_g, ciudad) VALUES ($1, $2, \'quito\')', [cod_pel, cod_ag]);
-  
+   
+    
+  await pool
+    .request()
+    .input('num_ejemplar', sql.Int, num_ejemplar)
+    .input('cod_pelicula', sql.Char, cod_pelicula)
+    .input('cod_agenica', sql.int, cod_agencia)
+    .query('begin distributed transaction')
+    .query('INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, \'guayaquil\') commit transaction');
+
+
     return res.json({
       message: 'Ejemplar Created successfully',
       body: {
         user: {
-          cod_pel, cod_ag
+          num_ejemplar, cod_pelicula, cod_agencia
         }
       }
     })
@@ -27,9 +35,10 @@ export const createEjemplar_info = async (req, res) => {
 export const deleteEjemplar_info = async (req, res)=> {
   const num= parseInt(req.params.num);
 
-    const response = await pool.query(
-                      'DELETE FROM Ejemplar_info WHERE num = $1 and ciudad = quito', [num]);
+  await pool
+    .query('begin distributed transaction')
+    .query('DELETE FROM Ejemplar_info WHERE num = $1 and ciudad = \'guayaquil\'', [num])
 
-    return res.json(`Reseña ${num} deleted Successfully`);
+  return res.json(`Ejemplar ${num} deleted Successfully`);
 
 }

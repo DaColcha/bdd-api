@@ -28,26 +28,19 @@ export const createReseña = async (req, res) => {
 
 }
 
-// export const createReseña = async (req, res) => {  
-//     const {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
-//     const pool = await getConnection()
-//     const result = await pool
-//             .query('INSERT INTO Reseña (num_reseña, cod_pelicula, cc_socio, descripcion, calificacion, fecha) VALUES ($1, $2, $3, $4,$5, CONVERT(Date, GETDATE()))', [num_reseña,cod_pelicula, cc_socio, descripcion, calificacion]);
-  
-//     return res.json({
-//       message: 'Reseña Created successfully',
-//       body: result
-//     })
-  
-//   }
   
   export const updateReseña = async (req, res) => {  
-    const {num, desc, calif} = req.body;
+    const {num_reseña, descripcion, calificacion} = req.body;
     const pool = await getConnection()
+    
+    await pool
+      .request()
+      .input('descripcion', sql.VarChar, descripcion)
+      .input('calificacion', sql.Int, calificacion)
+      .query('UPDATE Reseña set descripcion = @descripcion, calificacion= @calificacion , fecha = CONVERT(Date, GETDATE()) WHERE num_reseña = @num_reseña');
 
-    const response= await pool.query('UPDATE Reseña set descripcion= $1, calificacion=$2, fecha=  CONVERT(Date, GETDATE()) WHERE num_reseña = $3', [desc, calif, num ]);
   
-    return res.json(`Reseña ${num} updated Successfully`)
+    return res.json(`Reseña ${num_reseña} updated Successfully`)
   }
   
 
