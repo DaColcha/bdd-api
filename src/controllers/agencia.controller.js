@@ -1,4 +1,5 @@
 import getConnection from '../database.js'
+import sql from 'mssql'
 
 export const getAgencia = async (req, res) => {
     const pool = await getConnection()
@@ -10,47 +11,45 @@ export const getAgencia = async (req, res) => {
 export const createAgencia = async (req, res) => {
     const {cod_agencia, ciudad_agencia, direccion_agencia} = req.body;
     const pool = await getConnection()
-    const result = await pool
-            .query('INSERT INTO Agencia (cod_agencia, ciudad_agencia, direccion_agencia) VALUES ($1, $2, $3)', [cod_agencia, ciudad_agencia, direccion_agencia]);
-  
+
+    await pool
+      .request()
+      .input('cod_agencia', sql.Int, cod_agencia)
+      .input('ciudad_agencia', sql.VarChar, ciudad_agencia)
+      .input('direccion_agencia', sql.VarChar, direccion_agencia)
+      .query('BEGIN DISTRIBUED TRANSACTION INSERT INTO Agencia (cod_agencia, ciudad_agencia, direccion_agencia) VALUES (@cod_agencia, @ciudad_agencia, @direccion_agencia) COMMIT');
+
     return res.json({
       message: 'Agencia Created successfully',
-      body: {
-        user: {
-          cod_agencia, ciudad_agencia, direccion_agencia
-        }
-      }
-    })  
+      body: {cod_agencia, ciudad_agencia, direccion_agencia}
+    })
+
 }
 
 export const updateAgencia = async (req, res) => {
     const {cod_agencia, ciudad_agencia, direccion_agencia} = req.body;
     const pool = await getConnection()
-    const result = await pool
-            .query('UPDATE Agencia set direccion_agencia=$1 WHERE cod_agencia = $2 AND ciudad_agencia= $3', [direccion_agencia, cod_agencia, ciudad_agencia]);
-  
-    return res.json({
-      message: 'Agencia Updated successfully',
-      body: {
-        user: {
-          cod_agencia, ciudad_agencia, direccion_agencia
-        }
-      }
-    })  
+
+    await pool
+      .request()
+      .input('cod_agencia', sql.Int, cod_agencia)
+      .input('ciudad_agencia', sql.VarChar, ciudad_agencia)
+      .input('direccion_agencia', sql.VarChar, direccion_agencia)
+      .query('BEGIN DISTRIBUED TRANSACTION UPDATE Agencia SET direccion_agencia = @direccion_agencia WHERE cod_agencia = @cod_agencia AND ciudad_agencia = @ciudad_agencia COMMIT');
+
+    return res.json(`Agencia ${cod_agencia}-${ciudad_agencia} updated Successfully`)
+
 }
 
-export const deleteAgencia = async (req, res) => {
-    const {cod_agencia} = req.body;
-    const pool = await getConnection()
-    const result = await pool
-            .query('DELETE FROM Agencia WHERE cod_agencia = $1 AND ciudad_agencia = $2', [cod_agencia, ciudad_agencia]);
-  
-    return res.json({
-      message: 'Agencia Deleted successfully',
-      body: {
-        user: {
-          cod_agencia
-        }
-      }
-    })  
+export const deleteAgencia = async (req, res)=> {
+  const {cod_agencia, ciudad_agencia} = req.body;
+  const pool = await getConnection()
+
+  await pool
+    .request()
+    .input('cod_agencia', sql.Int, cod_agencia)
+    .input('ciudad_agencia', sql.VarChar, ciudad_agencia)
+    .query('BEGIN DISTRIBUED TRANSACTION DELETE FROM Agencia WHERE cod_agencia = @cod_agencia AND ciudad_agencia = @ciudad_agencia COMMIT');
+
+  return res.json(`Agencia ${cod_agencia}-${ciudad_agencia} deleted Successfully`);
 }

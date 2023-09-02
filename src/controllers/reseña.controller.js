@@ -10,8 +10,8 @@ export const getReseña = async (req, res) => {
 
 export const createReseña = async (req, res) => {  
   const {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
+  
   const pool = await getConnection()
-
   await pool
     .request()
     .input('num_reseña', sql.Int, num_reseña)
@@ -25,7 +25,6 @@ export const createReseña = async (req, res) => {
     message: 'Reseña Created successfully',
     body: {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion}
   })
-
 }
 
   
