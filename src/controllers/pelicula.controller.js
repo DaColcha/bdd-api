@@ -3,7 +3,7 @@ import getConnection from '../database.js'
 export const getPelicula = async (req, res) => {    
     const pool = await getConnection()
     const result = await pool.request()
-            .query('SELECT cod_peli, titulo, cod_dir, nacionalidad, productora, fecha_estreno FROM Reseña')
+            .query('SELECT cod_peli, titulo, cod_dir, nacionalidad, productora, fecha_estreno FROM Pelicula')
     return res.json(result.recordset)
 }
 

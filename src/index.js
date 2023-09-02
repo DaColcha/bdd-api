@@ -2,6 +2,7 @@ import express from 'express'
 
 import useRoutesReseña from './routes/reseña.routes.js'
 import useRoutesPelicula from './routes/pelicula.routes.js';
+import useRoutesAgencia from './routes/agencia.routes.js';
 
 import reseñaRoutes from './routes/reseña.routes.js'
 import participacion_actorRoutes from './routes/participacion_actor.routes.js'
@@ -17,6 +18,7 @@ app.use(express.json());
 //routes
 useRoutesReseña(app)
 useRoutesPelicula(app)
+useRoutesAgencia(app)
 
 
 app.listen(4000)
