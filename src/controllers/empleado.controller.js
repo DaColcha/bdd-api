@@ -20,7 +20,7 @@ export const createEmpleado = async (req, res) => {
     .input('cargo', sql.VarChar, cargo)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('ciudad', sql.VarChar, ciudad)
-    .query('begin distributed transaction INSERT INTO Empleado (cod_empleado, nombre, salario, cargo, cod_agencia, ciudad) VALUES (@cod_empleado, @nombre, @salario, @cargo, @cod_agencia, @ciudad) commit');
+    .query('set xact_abort on begin distributed transaction INSERT INTO Empleado (cod_empleado, nombre, salario, cargo, cod_agencia, ciudad) VALUES (@cod_empleado, @nombre, @salario, @cargo, @cod_agencia, @ciudad) commit');
 
   return res.json({
     message: 'Employee Created successfully',
