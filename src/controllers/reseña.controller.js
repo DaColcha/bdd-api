@@ -28,7 +28,7 @@ export const createReseña = async (req, res) => {
     const {num, desc, calif} = req.body;
     const pool = await getConnection()
 
-    const response= await pool.query('UPDATE users set descripcion= $1, calificacion=$2, fecha=  CONVERT(Date, GETDATE()) WHERE num_reseña = $3', [desc, calif, num ]);
+    const response= await pool.query('UPDATE Reseña set descripcion= $1, calificacion=$2, fecha=  CONVERT(Date, GETDATE()) WHERE num_reseña = $3', [desc, calif, num ]);
   
     return res.json(`Reseña ${num} updated Successfully`)
   }
@@ -38,7 +38,7 @@ export const createReseña = async (req, res) => {
     const num= parseInt(req.params.num);
   
       const response = await pool.query(
-                        'DELETE FROM users WHERE num = $1', [num]);
+                        'DELETE FROM Reseña WHERE num = $1', [num]);
 
       return res.json(`Reseña ${num} deleted Successfully`);
   
