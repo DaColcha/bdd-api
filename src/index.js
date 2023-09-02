@@ -2,7 +2,6 @@ import express from 'express'
 
 import useRoutesReseña from './routes/reseña.routes.js'
 import useRoutesPelicula from './routes/pelicula.routes.js';
-
 import reseñaRoutes from './routes/reseña.routes.js'
 import participacion_actorRoutes from './routes/participacion_actor.routes.js'
 import socioRoutes from './routes/socio.routes.js'
