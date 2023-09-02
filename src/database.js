@@ -3,8 +3,8 @@ import sql from 'mssql'
 const dbSettings = {
     user: 'sa',
     password: 'P@ssw0rd',
-    server: config.server,
-    database: config.database, 
+    server: 'COLCHAD\\MSSQLSERVER16',
+    database: 'globguster_GYE', 
     options: {
         encrypt: true,
         trustServerCertificate: true
