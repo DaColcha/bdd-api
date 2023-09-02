@@ -27,7 +27,7 @@ export const updateAgencia = async (req, res) => {
     const {cod_agencia, ciudad_agencia, direccion_agencia} = req.body;
     const pool = await getConnection()
     const result = await pool
-            .query('UPDATE Agencia set ciudad_agencia= $1, direccion_agencia=$2 WHERE cod_agencia = $3', [ciudad_agencia, direccion_agencia, cod_agencia]);
+            .query('UPDATE Agencia set direccion_agencia=$1 WHERE cod_agencia = $2 AND ciudad_agencia= $3', [direccion_agencia, cod_agencia, ciudad_agencia]);
   
     return res.json({
       message: 'Agencia Updated successfully',
@@ -43,7 +43,7 @@ export const deleteAgencia = async (req, res) => {
     const {cod_agencia} = req.body;
     const pool = await getConnection()
     const result = await pool
-            .query('DELETE FROM Agencia WHERE cod_agencia = $1', [cod_agencia]);
+            .query('DELETE FROM Agencia WHERE cod_agencia = $1 AND ciudad_agencia = $2', [cod_agencia, ciudad_agencia]);
   
     return res.json({
       message: 'Agencia Deleted successfully',

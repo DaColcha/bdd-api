@@ -1,11 +1,14 @@
 import Router from 'express'
-import { getEmpleado_DMQ, createEmpleado_DMQ, updateEmpleado_DMQ, deleteEmpleado_DMQ } from '../controllers/empleado.controller'
+import { getEmpleado, createEmpleado, updateEmpleado, deleteEmpleado } from '../controllers/empleado.controller'
 
 const router = Router()
 
-router.get('/empleado', getEmpleado_DMQ)
-router.post('/empleado', createEmpleado_DMQ)
-router.put('/empleado/:cod_empleado, cod_agencia, ciudad', updateEmpleado_DMQ)
-router.delete('/empleado/:cod_empleado, cod_agencia, ciudad', deleteEmpleado_DMQ)
+const useRoutesEmpleado = (app) => {
+    app.use('/glob-guster', router)
+    router.get('/empleado', getEmpleado)
+    router.post('/empleado', createEmpleado)
+    router.put('/empleado/:cod_empleado/:cod_agencia/:ciudad', updateEmpleado)
+    router.delete('/empleado/:cod_empleado/:cod_agencia/:ciudad', deleteEmpleado)
+}
 
-export default router
+export default useRoutesEmpleado
