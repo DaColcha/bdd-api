@@ -1,4 +1,5 @@
 import getConnection from '../database.js'
+import sql from 'mssql'
 
 export const getParticipacion_Actor = async (req, res) => {
     const pool = await getConnection()
@@ -9,9 +10,15 @@ export const getParticipacion_Actor = async (req, res) => {
 
 export const createParticipacion_Actor = async (req, res) => {
     const { cod_pelicula, cod_actor, salario, tipo_actor } = req.body;
+    
     const pool = await getConnection()
-    const result = await pool
-        .query('INSERT INTO Participacion_Actor (cod_pelicula, cod_actor, salario, tipo_actor) VALUES ($1, $2, $3, $4)', [cod_pelicula, cod_actor, salario, tipo_actor]);
+    await pool
+        .request()
+        .input('cod_pelicula', sql.Char, cod_pelicula)
+        .input('cod_actor', sql.Char, cod_actor)
+        .input('salario', sql.Money, salario)
+        .input('tipo_actor', sql.VarChar, tipo_actor)
+        .query('INSERT INTO Participacion_Actor (cod_pelicula, cod_actor, salario, tipo_actor) VALUES (@cod_pelicula, @cod_actor, @salario, @tipo_actor)');
 
     return res.json({
         message: 'Participation Created successfully',
@@ -25,9 +32,15 @@ export const createParticipacion_Actor = async (req, res) => {
 
 export const updateParticipacion_Actor = async (req, res) => {
     const { cod_pelicula, cod_actor, salario, tipo_actor } = req.body;
+    
     const pool = await getConnection()
-    const result = await pool
-        .query('UPDATE Participacion_Actor set salario=$1, tipo_actor=$2 WHERE (cod_pelicula = $3 AND cod_actor = $4)', [salario, tipo_actor, cod_pelicula, cod_actor]);
+    await pool
+        .request()
+        .input('cod_pelicula', sql.Char, cod_pelicula)
+        .input('cod_actor', sql.Char, cod_actor)
+        .input('salario', sql.Money, salario)
+        .input('tipo_actor', sql.VarChar, tipo_actor)
+        .query('UPDATE Participacion_Actor set salario=@salario, tipo_actor=@tipo_actor WHERE (cod_pelicula=@cod_pelicula AND cod_actor=@cod_actor)');
 
     return res.json({
         message: 'Participation Updated successfully',
@@ -41,9 +54,13 @@ export const updateParticipacion_Actor = async (req, res) => {
 
 export const deleteParticipacion_Actor = async (req, res) => {
     const { cod_pelicula, cod_actor } = req.body;
+    
     const pool = await getConnection()
-    const result = await pool
-        .query('DELETE FROM Participacion_Actor WHERE (cod_pelicula = $1 AND cod_actor = $2)', [cod_pelicula, cod_actor]);
+    await pool
+        .request()
+        .input('cod_pelicula', sql.Char, cod_pelicula)
+        .input('cod_actor', sql.Char, cod_actor)
+        .query('DELETE FROM Participacion_Actor WHERE (cod_pelicula=@cod_pelicula AND cod_actor=@cod_actor)');
 
     return res.json({
         message: 'Participation Deleted successfully',
