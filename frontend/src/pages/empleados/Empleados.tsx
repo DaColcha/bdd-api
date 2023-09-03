@@ -1,6 +1,6 @@
 import { GridColDef } from "@mui/x-data-grid";
 import DataTable from "../../components/dataTable/DataTable";
-import "./Users.scss";
+import "./Empleados.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
@@ -27,7 +27,7 @@ const columns: GridColDef[] = [
   },
 ];
 
-const Users = () => {
+const Empleados = () => {
   const [open, setOpen] = useState(false);
 
   // TEST THE API
@@ -35,26 +35,26 @@ const Users = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["allusers"],
     queryFn: () =>
-      fetch("http://localhost:8800/api/users").then((res) => res.json()),
+      fetch("http://localhost:8800/glob-guster/empleado").then((res) => res.json()),
   });
 
   return (
-    <div className="users">
+    <div className="empleados">
       <div className="info">
-        <h1>Users</h1>
+        <h1>Empleados</h1>
         <button onClick={() => setOpen(true)}>Add New User</button>
       </div>
-      {/* <DataTable slug="users" columns={columns} rows={userRows} /> */}
+      {/* <DataTable slug="empleados" columns={columns} rows={userRows} /> */}
       {/* TEST THE API */}
 
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTable slug="users" columns={columns} rows={data} />
+        <DataTable slug="empleados" columns={columns} rows={data} />
       )}
-      {open && <Add slug="user" columns={columns} setOpen={setOpen} />}
+      {open && <Add slug="empleado" columns={columns} setOpen={setOpen} />}
     </div>
   );
 };
 
-export default Users;
+export default Empleados;

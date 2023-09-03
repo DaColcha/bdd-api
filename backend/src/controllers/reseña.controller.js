@@ -4,17 +4,27 @@ import sql from 'mssql'
 export const getReseña = async (req, res) => {    
     const pool = await getConnection()
     const result = await pool.request()
-            .query('SELECT num_reseña, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña')
+            .query('SELECT num_reseña as id, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña')
     return res.json(result.recordset)
 }
 
+export const getReseñabyId = async (req, res) => {    
+  const num = parseInt(req.params.num)
+    const pool = await getConnection()
+    await pool.request()
+    .input('num', sql.Int, num)
+    .query('SELECT num_reseña as id, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña WHERE num_reseña = @num');
+  return res.json(result.recordset)
+}
+
+
 export const createReseña = async (req, res) => {  
-  const {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
+  const {id,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
   
   const pool = await getConnection()
   await pool
     .request()
-    .input('num_reseña', sql.Int, num_reseña)
+    .input('num_reseña', sql.Int, id)
     .input('cod_pelicula', sql.Char, cod_pelicula)
     .input('cc_socio', sql.Char, cc_socio)
     .input('descripcion', sql.VarChar, descripcion)
@@ -23,7 +33,7 @@ export const createReseña = async (req, res) => {
 
   return res.json({
     message: 'Reseña Created successfully',
-    body: {num_reseña,cod_pelicula, cc_socio, descripcion, calificacion}
+    body: {id,cod_pelicula, cc_socio, descripcion, calificacion}
   })
 }
 
@@ -44,11 +54,12 @@ export const createReseña = async (req, res) => {
   
 
   export const deleteReseña = async (req, res)=> {
-    const num= parseInt(req.params.num);
+    const num = parseInt(req.params.num)
     const pool = await getConnection()
-      const response = await pool.query(
-                        'DELETE FROM Reseña WHERE num_reseña = $1', [num]);
+    await pool.request()
+    .input('num', sql.Int, num)
+    .query('DELETE FROM Reseña WHERE num_reseña = @num');
 
-      return res.json(`Reseña ${num} deleted Successfully`);
+    return res.json(`Reseña ${num} deleted Successfully`);
   
   }

@@ -15,7 +15,7 @@ const DataTable = (props: Props) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: number) => {
-      return fetch(`http://localhost:8800/api/${props.slug}/${id}`, {
+      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}`, {
         method: "delete",
       });
     },
@@ -52,6 +52,7 @@ const DataTable = (props: Props) => {
       <DataGrid
         className="dataGrid"
         rows={props.rows}
+        getRowId={(row) =>  row.id}
         columns={[...props.columns, actionColumn]}
         initialState={{
           pagination: {

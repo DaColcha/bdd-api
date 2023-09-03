@@ -4,8 +4,8 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="logo">
-        <img src="logo.svg" alt="" />
-        <span>AGENCIA GYE</span>
+        
+        <span>GLOB GUSTER</span>
       </div>
       <div className="icons">
         <div className="user">

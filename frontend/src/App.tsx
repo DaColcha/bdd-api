@@ -1,13 +1,12 @@
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-import Users from "./pages/users/Users";
 import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import Menu from "./components/menu/Menu";
 import Login from "./pages/login/Login";
 import "./styles/global.scss";
-import User from "./pages/user/User";
-
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+//import Empleados from "./pages/empleados/Empleados";
+import Reseñas from "./pages/reseñas/Reseñas";
 
 const queryClient = new QueryClient();
 
@@ -37,14 +36,14 @@ function App() {
       element: <Layout />,
       children: [
         {
-          path: "/users",
-          element: <Users />,
+          path: "/glob-guster/resenia",
+          element: <Reseñas />,
         },
 
-        {
-          path: "/users/:id",
-          element: <User />,
-        },
+        // {
+        //   path: "/empleado/:id",
+        //   element: <Empleado />,
+        // },
       ],
     },
     {

@@ -1,9 +1,9 @@
 import Router from 'express'
-import { getEjemplar_info, createEjemplar_info, deleteEjemplar_info } from '../controllers/ejemplar_info.controller' 
+import { getEjemplar_info, createEjemplar_info, deleteEjemplar_info } from '../controllers/ejemplar_info.controller.js' 
 
 const router = Router()
 
-const useRoutesDirector = (app) => {
+const useRoutesEjemplar_info = (app) => {
     app.use('/glob-guster', router)
 
     router.get('/ejemplar-info', getEjemplar_info)
@@ -11,4 +11,4 @@ const useRoutesDirector = (app) => {
     router.delete('/ejemplar-info/:num', deleteEjemplar_info)    
 }
 
-export default useRoutesDirector
+export default useRoutesEjemplar_info
