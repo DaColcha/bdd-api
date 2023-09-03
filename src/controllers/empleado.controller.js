@@ -40,7 +40,7 @@ export const updateEmpleado = async (req, res) => {
     .input('cargo', sql.VarChar, cargo)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('ciudad', sql.VarChar, ciudad)
-    .query('begin distributed transaction UPDATE Empleado set nombre=@nombre, salario=@salario, cargo=@cargo WHERE (cod_empleado=@cod_empleado AND cod_agencia=@cod_agencia AND ciudad=@ciudad) commit');
+    .query('set xact_abort begin distributed transaction UPDATE Empleado set nombre=@nombre, salario=@salario, cargo=@cargo WHERE (cod_empleado=@cod_empleado AND cod_agencia=@cod_agencia AND ciudad=@ciudad) commit');
 
   return res.json({
     message: `Employee ${nombre} updated Successfully`,
@@ -58,7 +58,7 @@ export const deleteEmpleado = async (req, res) => {
     .input('cod_empleado', sql.Int, cod_empleado)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('ciudad', sql.VarChar, ciudad)
-    .query('begin distributed transaction DELETE FROM Empleado WHERE (cod_empleado=@cod_empleado AND cod_agencia=@cod_agencia AND ciudad=@ciudad) commit');
+    .query('set xact_abort begin distributed transaction DELETE FROM Empleado WHERE (cod_empleado=@cod_empleado AND cod_agencia=@cod_agencia AND ciudad=@ciudad) commit');
   
   return res.json(`Employee ${cod_empleado}-${cod_agencia} deleted Successfully`);
 }
