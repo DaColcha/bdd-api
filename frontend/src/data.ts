@@ -9,6 +9,11 @@ export const menu = [
         title: "Reseñas",
         url: "/glob-guster/resenia"
       },
+      {
+        id: 1,
+        title: "Alquileres",
+        url: "/glob-guster/alquiler"
+      },
       
     ],
   },
