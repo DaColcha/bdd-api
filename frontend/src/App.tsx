@@ -5,7 +5,8 @@ import Menu from "./components/menu/Menu";
 import Login from "./pages/login/Login";
 import "./styles/global.scss";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-//import Empleados from "./pages/empleados/Empleados";
+
+//import de pages
 import Reseñas from "./pages/reseñas/Reseñas";
 
 const queryClient = new QueryClient();
