@@ -10,8 +10,18 @@ export const getAlquiler = async (req, res) => {
 export const createAlquiler = async (req, res) => {  
     const {cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad} = req.body;
     const pool = await getConnection()
-    const result = await pool
-        .query('INSERT INTO Alquiler (cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)', [cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad]);
+    await pool
+    .request()
+    .input('cod_alquiler', sql.Int, cod_alquiler)
+    .input('cod_emp', sql.VarChar, cod_emp)
+    .input('cod_agenica', sql.Int, cod_agencia)
+    .input('cc_socio', sql.Char, cargo)
+    .input('num_ejemplar', sql.Int, num_ejemplar)
+    .input('cod_pelicula', sql.Char, cod_pelicula)
+    .input('fecha_inicio', sql.Date, fecha_inicio)
+    .input('fecha_entrega', sql.Date, fecha_entrega)
+    .input('ciudad', sql.VarChar, ciudad)
+    .query('set xact_abort on begin distributed transaction INSERT INTO Alquiler (cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad) VALUES (@cod_alquiler, @cod_emp, @cod_agencia, @cc_socio, @num_ejemplar, @cod_pelicula, @fecha_inicio, @fecha_entrega, @ciudad) commit');
   
     return res.json({
       message: 'Rent Created successfully',
@@ -25,12 +35,18 @@ export const createAlquiler = async (req, res) => {
   }
   
   export const updateAlquiler = async (req, res) => {  
-    const {cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad} = req.body;
+    const {cod_alquiler, fecha_inicio, fecha_entrega, ciudad} = req.body;
     const pool = await getConnection()
 
-    const result= await pool.query('UPDATE Alquiler set cod_emp=$1, cod_agencia=$2, cc_socio=$3, num_ejemplar=$4, cod_pelicula=$5, fecha_inicio=$6, fecha_entrega=$7 WHERE (cod_alquiler = $8 AND ciudad = $9)', [cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, cod_alquiler, ciudad]);
+    await pool
+    .request()
+    .input('cod_alquiler', sql.Int, cod_alquiler)
+    .input('fecha_inicio', sql.Date, fecha_inicio)
+    .input('fecha_entrega', sql.Date, fecha_entrega)
+    .input('ciudad', sql.VarChar, ciudad)
+    .query('set xact_abort on begin distributed transaction UPDATE Alquiler set fecha_inicio=@fecha_inicio, fecha_entrega=@fecha_entrega WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad) commit');
   
-    return res.json(`Rent ${cc} updated Successfully`)
+    return res.json(`Rent ${cod_alquiler} updated Successfully`)
   }
   
 
@@ -40,7 +56,7 @@ export const createAlquiler = async (req, res) => {
     await pool.request()
     .input('cod_alquiler', sql.Int, cod_alquiler)
     .input('ciudad', sql.VarChar, ciudad)
-    .query( 'DELETE FROM Alquiler WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad)');
+    .query( 'set xact_abort on begin distributed transaction DELETE FROM Alquiler WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad) commit');
 
     return res.json(`Rent ${cod_alquiler}-${ciudad} deleted Successfully`);
   }
