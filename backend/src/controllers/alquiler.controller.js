@@ -1,4 +1,5 @@
 import getConnection from '../database.js'
+import sql from 'mssql'
 
 export const getAlquiler = async (req, res) => {    
     const pool = await getConnection()

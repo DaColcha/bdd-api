@@ -1,5 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
-import DataTable from "../../components/dataTable/DataTable";
+import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
 import "./alquileres.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
@@ -84,7 +84,7 @@ const Alquileres = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTable slug="alquiler" columns={columns} rows={data} />
+        <DataTableAlquiler slug="alquiler" columns={columns} rows={data} />
       )}
       {open && <Add slug="alquiler" columns={columns} setOpen={setOpen} />}
     </div>
