@@ -11,19 +11,19 @@ const columns: GridColDef[] = [
     field: "id",
     type: "number",
     headerName: "Cod. Alquiler",
-    width: 100,
+    width: 75,
   },
   {
     field: "cod_emp",
     type: "number",
     headerName: "Empleado",
-    width: 150,
+    width: 75,
   },
   {
     field: "cod_agencia",
     type: "number",
     headerName: "Agencia",
-    width: 150,
+    width: 75,
   },
   {
     field: "cc_socio",
@@ -35,7 +35,7 @@ const columns: GridColDef[] = [
     field: "num_ejemplar",
     type: "number",
     headerName: "Ejemplar",
-    width: 150,
+    width: 75,
   },
   {
     field: "cod_pelicula",

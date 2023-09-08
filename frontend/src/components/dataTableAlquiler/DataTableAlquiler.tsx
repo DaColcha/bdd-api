@@ -14,8 +14,8 @@ const DataTable = (props: Props) => {
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (id: number) => {
-      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}`, {
+    mutationFn: (id: number, ciudad: any) => {
+      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}/${ciudad}`, {
         method: "delete",
       });
     },
@@ -24,9 +24,9 @@ const DataTable = (props: Props) => {
     },
   });
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: number, ciudad: string) => {
     //delete the item
-    mutation.mutate(id);
+    mutation.mutate(id, ciudad);
   };
 
   const actionColumn: GridColDef = {
@@ -39,7 +39,7 @@ const DataTable = (props: Props) => {
           <Link to={`/${props.slug}/${params.row.id}`}>
             <img src="/view.svg" alt="" />
           </Link>
-          <div className="delete" onClick={() => handleDelete(params.row.id)}>
+          <div className="delete" onClick={() => handleDelete(params.row.id, params.row.ciudad)}>
             <img src="/delete.svg" alt="" />
           </div>
         </div>

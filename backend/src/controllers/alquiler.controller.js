@@ -37,8 +37,10 @@ export const createAlquiler = async (req, res) => {
   export const deleteAlquiler = async (req, res)=> {
     const {cod_alquiler, ciudad} = req.body;
     const pool = await getConnection()
-    const result = await pool.query(
-        'DELETE FROM Alquiler WHERE (cod_alquiler = $1 AND ciudad = $2)', [cod_alquiler, ciudad]);
+    await pool.request()
+    .input('cod_alquiler', sql.Int, cod_alquiler)
+    .input('ciudad', sql.VarChar, ciudad)
+    .query( 'DELETE FROM Alquiler WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad)');
 
     return res.json(`Rent ${cod_alquiler}-${ciudad} deleted Successfully`);
   }
