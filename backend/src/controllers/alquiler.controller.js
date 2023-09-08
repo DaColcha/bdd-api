@@ -3,7 +3,7 @@ import getConnection from '../database.js'
 export const getAlquiler = async (req, res) => {    
     const pool = await getConnection()
     const result = await pool.request()
-        .query('SELECT cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad FROM Alquiler')
+        .query('SELECT cod_alquiler as id, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad FROM Alquiler')
     return res.json(result.recordset)
 }
 

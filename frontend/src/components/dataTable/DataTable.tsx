@@ -15,6 +15,12 @@ const DataTable = (props: Props) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: number) => {
+      if (props.slug === "alquileres") {
+        return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}/guayaquil`, {
+          method: "delete",
+        });
+      }
+      
       return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}`, {
         method: "delete",
       });

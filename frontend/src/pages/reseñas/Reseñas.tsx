@@ -60,7 +60,7 @@ const Reseñas = () => {
     <div className="reseñas">
       <div className="info">
         <h1>Reseñas</h1>
-        <button onClick={() => setOpen(true)}>Add New User</button>
+        <button onClick={() => setOpen(true)}>Agregar reseña</button>
       </div>
 
       {isLoading ? (

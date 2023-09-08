@@ -78,7 +78,7 @@ const Alquileres = () => {
     <div className="alquileres">
       <div className="info">
         <h1>Alquileres</h1>
-        <button onClick={() => setOpen(true)}>Add New Alquiler</button>
+        <button onClick={() => setOpen(true)}>Alquilar pelicula</button>
       </div>
 
       {isLoading ? (

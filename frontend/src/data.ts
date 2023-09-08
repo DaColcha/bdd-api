@@ -10,7 +10,7 @@ export const menu = [
         url: "/glob-guster/resenia"
       },
       {
-        id: 1,
+        id: 2,
         title: "Alquileres",
         url: "/glob-guster/alquiler"
       },
