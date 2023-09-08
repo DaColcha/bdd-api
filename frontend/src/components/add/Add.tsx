@@ -23,12 +23,14 @@ const Add = (props: Props) => {
   const mutation = useMutation({
     mutationFn: () => {
       console.log(FormData)
+
       return fetch(`http://localhost:4000/glob-guster/${props.slug}`, {
         method: "post",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
+        
         body: JSON.stringify(FormData),
       });
 
@@ -44,6 +46,7 @@ const Add = (props: Props) => {
     //add new item   
     mutation.mutate();
     props.setOpen(false)
+    window.location.reload();
   };
 
   return (
@@ -55,6 +58,7 @@ const Add = (props: Props) => {
         <h1>Add new {props.slug}</h1>
         <form onSubmit={handleSubmit}>
           {props.columns
+            .filter((column) => column.field !== "fecha_inicio" && column.field !== "fecha_entrega")
             .map((column) => (
               <div className="item">
                 <label>{column.headerName}</label>

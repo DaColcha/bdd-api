@@ -30,6 +30,7 @@ const DataTableAlquiler = (props: Props) => {
     let ID: string;
     ID = `${id}-${ciudad}`;
     mutation.mutate(ID);
+    window.location.reload();
   };
 
   const actionColumn: GridColDef = {

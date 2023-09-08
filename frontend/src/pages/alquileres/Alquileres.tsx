@@ -29,7 +29,7 @@ const columns: GridColDef[] = [
     field: "cc_socio",
     type: "string",
     headerName: "Socio",
-    width: 150,
+    width: 100,
   },
   {
     field: "num_ejemplar",
@@ -41,7 +41,7 @@ const columns: GridColDef[] = [
     field: "cod_pelicula",
     type: "string",
     headerName: "Película",
-    width: 150,
+    width: 100,
   },
   {
     field: "fecha_inicio",

@@ -9,26 +9,24 @@ export const getAlquiler = async (req, res) => {
 }
 
 export const createAlquiler = async (req, res) => {  
-    const {cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad} = req.body;
+    const {id, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, ciudad} = req.body;
     const pool = await getConnection()
     await pool
     .request()
-    .input('cod_alquiler', sql.Int, cod_alquiler)
+    .input('id', sql.Int, id)
     .input('cod_emp', sql.VarChar, cod_emp)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('cc_socio', sql.Char, cc_socio)
     .input('num_ejemplar', sql.Int, num_ejemplar)
     .input('cod_pelicula', sql.Char, cod_pelicula)
-    .input('fecha_inicio', sql.Date, fecha_inicio)
-    .input('fecha_entrega', sql.Date, fecha_entrega)
     .input('ciudad', sql.VarChar, ciudad)
-    .query('set xact_abort on begin distributed transaction INSERT INTO Alquiler (cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad) VALUES (@cod_alquiler, @cod_emp, @cod_agencia, @cc_socio, @num_ejemplar, @cod_pelicula, @fecha_inicio, @fecha_entrega, @ciudad) commit');
+    .query('set xact_abort on begin distributed transaction INSERT INTO Alquiler (cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad) VALUES (@id, @cod_emp, @cod_agencia, @cc_socio, @num_ejemplar, @cod_pelicula, CONVERT(Date, GETDATE()), dateadd(day, 5,CONVERT(Date, GETDATE())), @ciudad) commit');
   
     return res.json({
       message: 'Rent Created successfully',
       body: {
         user: {
-            cod_alquiler, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, fecha_inicio, fecha_entrega, ciudad
+            id, cod_emp, cod_agencia, cc_socio, num_ejemplar, cod_pelicula, ciudad
         }
       }
     })
