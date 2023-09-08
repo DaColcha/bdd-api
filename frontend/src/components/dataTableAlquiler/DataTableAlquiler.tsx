@@ -9,7 +9,7 @@ type Props = {
   slug: string;
 };
 
-const DataTable = (props: Props) => {
+const DataTableAlquiler = (props: Props) => {
   // TEST THE API
 
   const queryClient = useQueryClient();
@@ -81,4 +81,4 @@ const DataTable = (props: Props) => {
   );
 };
 
-export default DataTable;
+export default DataTableAlquiler;
