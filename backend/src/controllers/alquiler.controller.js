@@ -52,7 +52,8 @@ export const createAlquiler = async (req, res) => {
   
 
   export const deleteAlquiler = async (req, res)=> {
-    const {cod_alquiler, ciudad} = req.body;
+    const cod_alquiler = parseInt(req.params.cod_alquiler);
+    const ciudad = req.params.ciudad;
     const pool = await getConnection()
     await pool.request()
     .input('cod_alquiler', sql.Int, cod_alquiler)
