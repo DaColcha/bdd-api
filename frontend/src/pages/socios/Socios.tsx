@@ -60,7 +60,7 @@ const Socios = () => {
     <div className="socios">
       <div className="info">
         <h1>Socios</h1>
-        <button onClick={() => setOpen(true)}>Agregar Socio</button>
+        <button onClick={() => setOpen(true)}> Agregar Socio </button>
       </div>
 
       {isLoading ? (
