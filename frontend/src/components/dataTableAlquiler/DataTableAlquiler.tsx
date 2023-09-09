@@ -1,7 +1,9 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTableAlquiler.scss";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useState } from "react";
+import ModifyAlquiler from "../modify/ModifyAlquiler";
 
 type Props = {
   columns: GridColDef[];
@@ -38,14 +40,16 @@ const DataTableAlquiler = (props: Props) => {
     headerName: "Action",
     width: 200,
     renderCell: (params) => {
+      const [open, setOpen] = useState(false);
       return (
         <div className="action">
-          <Link to={`/${props.slug}/${params.row.id}`}>
+          <div className='modify' onClick={() => setOpen(true)}>
             <img src="/view.svg" alt="" />
-          </Link>
+          </div>
           <div className="delete" onClick={() => handleDelete(params.row.id, params.row.ciudad)}>
             <img src="/delete.svg" alt="" />
           </div>
+          {open && <ModifyAlquiler slug="alquiler" columns={props.columns} setOpen={setOpen} values={[`${params.row.id}`, `${params.row.cod_emp}`, `${params.row.cod_agencia}`, `${params.row.cc_socio}`, `${params.row.num_ejemplar}`, `${params.row.cod_pelicula}`, `${params.row.ciudad}`]}/>}
         </div>
       );
     },
