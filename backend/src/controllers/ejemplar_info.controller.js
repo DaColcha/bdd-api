@@ -16,9 +16,8 @@ export const createEjemplar_info = async (req, res) => {
     .request()
     .input('num_ejemplar', sql.Int, num_ejemplar)
     .input('cod_pelicula', sql.Char, cod_pelicula)
-    .input('cod_agenica', sql.int, cod_agencia)
-    .query('begin distributed transaction')
-    .query('INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, \'guayaquil\') commit transaction');
+    .input('cod_agencia', sql.int, cod_agencia)
+    .query('set xact_abort on begin distributed transaction INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, \'guayaquil\') commit transaction');
 
 
     return res.json({

@@ -13,6 +13,10 @@ export const menu = [
         id: 2,
         title: "Alquileres",
         url: "/glob-guster/alquiler"
+      },{
+        id: 3,
+        title: "Socios",
+        url: "/glob-guster/socio"
       },
       
     ],

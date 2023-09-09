@@ -29,19 +29,19 @@ const columns: GridColDef[] = [
     field: "descripcion",
     type: "string",
     headerName: "Descripcion",
-    width: 150,
+    width: 275
   },
   {
     field: "calificacion",
     type: "number",
     headerName: "Calificacion",
-    width: 150,
+    width: 100,
   },
   {
     field: "fecha",
     type: "string",
     headerName: "Fecha",
-    width: 150,
+    width: 125,
   },
 ];
 
