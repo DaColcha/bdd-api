@@ -109,7 +109,6 @@ const Peliculas = () => {
       )}
     </div>
   );
-}
-
+};
 
 export default Peliculas;
