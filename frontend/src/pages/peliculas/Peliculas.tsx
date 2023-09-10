@@ -1,5 +1,5 @@
 import { GridColDef } from "@mui/x-data-grid";
-// import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
+// import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 import "./peliculas.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
