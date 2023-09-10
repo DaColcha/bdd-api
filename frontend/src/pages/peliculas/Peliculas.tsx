@@ -6,7 +6,7 @@ import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
 import Update from "../../components/update/Update";
-import DataTableAlquiler from "../../components/dataTablePelicula/DataTablePelicula";
+import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 
 const columns: GridColDef[] = [
   {
