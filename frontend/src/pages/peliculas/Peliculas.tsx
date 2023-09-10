@@ -1,6 +1,6 @@
 import { GridColDef } from "@mui/x-data-grid";
 // import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
-import "./alquileres.scss";
+import "./peliculas.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
