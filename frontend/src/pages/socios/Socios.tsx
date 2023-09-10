@@ -3,7 +3,7 @@ import DataTable from "../../components/dataTable/DataTable";
 import "./socios.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
-import Update from "../../components/update/Update";
+import Update from "../../components/update/updateSocio/UpdateSocio";
 import { useQuery } from "@tanstack/react-query";
 
 const columns: GridColDef[] = [
@@ -75,11 +75,11 @@ const Socios = () => {
       ) : (
         <DataTable slug="socio" columns={columns} rows={data} onEditClick={handleEditClick}/>
       )}
-      {openAddModal && <Add slug="alquiler" columns={columns} setOpen={setOpenAddModal} />}
+      {openAddModal && <Add slug="socio" columns={columns} setOpen={setOpenAddModal} />}
 
       {isUpdateModalOpen && selectedItem && (
         <Update
-          slug="alquiler"
+          slug="socio"
           columns={columns}
           setOpen={setUpdateModalOpen}
           selectedItem={selectedItem}

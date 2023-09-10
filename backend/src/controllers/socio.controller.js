@@ -43,14 +43,14 @@ export const createSocio = async (req, res) => {
       .query('UPDATE Socio set nombre=@nombre, telf=@telf, ciudad=@ciudad, direccion=@direccion, garante=@garante WHERE cc=@cc');
   
     return res.json({
-      message: `Socio ${cc} updated Successfully`,
-      body: {cc, nombre, telf, ciudad, direccion, garante}
+      message: `Socio ${id} updated Successfully`,
+      body: {id, nombre, telf, ciudad, direccion, garante}
     })
   }
   
 
   export const deleteSocio = async (req, res)=> {
-    const cc = req.params.id;
+    const cc = req.params.cc;
     
     const pool = await getConnection()
     await pool

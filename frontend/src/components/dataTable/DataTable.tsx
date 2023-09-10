@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import "./dataTable.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
