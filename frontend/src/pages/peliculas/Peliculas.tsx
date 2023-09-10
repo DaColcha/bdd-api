@@ -71,7 +71,7 @@ const Peliculas = () => {
         <button onClick={() => setOpenAddModal(true)}>Agregar</button>
       </div>
       <div className="peliculas__table">
-        <DataTableAlquiler
+        <DataTablePelicula
           columns={[...columns, { ...actionColumn, renderCell: (params) => {
             return (
               <div className="action">
