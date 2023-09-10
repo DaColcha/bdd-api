@@ -1,16 +1,15 @@
 import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
 import "./dataTable.scss";
-import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type Props = {
   columns: GridColDef[];
   rows: object[];
   slug: string;
+  onEditClick: (item: any) => void;
 };
 
 const DataTable = (props: Props) => {
-  // TEST THE API
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
@@ -31,15 +30,12 @@ const DataTable = (props: Props) => {
   };
 
   const actionColumn: GridColDef = {
-    field: "action",
-    headerName: "Action",
+    field: "actionD",
+    headerName: "Delete",
     width: 200,
     renderCell: (params) => {
       return (
         <div className="action">
-          <Link to={`/${props.slug}/${params.row.id}`}>
-            <img src="/view.svg" alt="" />
-          </Link>
           <div className="delete" onClick={() => handleDelete(params.row.id)}>
             <img src="/delete.svg" alt="" />
           </div>
@@ -53,27 +49,22 @@ const DataTable = (props: Props) => {
       <DataGrid
         className="dataGrid"
         rows={props.rows}
-        getRowId={(row) =>  row.id}
-        columns={[...props.columns, actionColumn]}
-        initialState={{
-          pagination: {
-            paginationModel: {
-              pageSize: 10,
-            },
-          },
-        }}
-        slots={{ toolbar: GridToolbar }}
-        slotProps={{
-          toolbar: {
-            showQuickFilter: false,
-            quickFilterProps: { debounceMs: 500 },
-          },
-        }}
-        pageSizeOptions={[5]}
-        disableRowSelectionOnClick
-        disableColumnFilter
-        disableDensitySelector
-        disableColumnSelector
+        columns={[
+          ...props.columns,
+          {
+            field: "action",
+            headerName: "Action",
+            width: 200,
+            renderCell: (params) => (
+              <div className="action">
+                <div className='modify' onClick={() => props.onEditClick(params.row)}>
+                  <img src="/view.svg" alt="" />
+                </div>
+              </div>
+
+            ),
+          }, actionColumn
+        ]}
       />
     </div>
   );

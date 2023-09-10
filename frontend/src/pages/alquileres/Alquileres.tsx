@@ -1,10 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
-import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
+// import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
 import "./alquileres.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
+import Update from "../../components/update/Update";
+import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
 
 const columns: GridColDef[] = [
   {
@@ -64,9 +66,9 @@ const columns: GridColDef[] = [
 ];
 
 const Alquileres = () => {
-  const [open, setOpen] = useState(false);
-
-  // TEST THE API
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null); // Almacena el elemento seleccionado para actualizar
 
   const { isLoading, data } = useQuery({
     queryKey: ["allalquileres"],
@@ -74,19 +76,35 @@ const Alquileres = () => {
       fetch("http://localhost:4000/glob-guster/alquiler").then((res) => res.json()),
   });
 
+  const handleEditClick = (item: any) => {
+    // Abre el modal de actualización y pasa el elemento seleccionado
+    setSelectedItem(item);
+    setUpdateModalOpen(true);
+  };
+  
   return (
     <div className="alquileres">
       <div className="info">
         <h1>Alquileres</h1>
-        <button onClick={() => setOpen(true)}>Alquilar pelicula</button>
+        <button onClick={() => setOpenAddModal(true)}>Alquilar película</button>
       </div>
 
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTableAlquiler slug="alquiler" columns={columns} rows={data} />
+        <DataTableAlquiler slug="alquiler" columns={columns} rows={data} onEditClick={handleEditClick}/> // Pasa la función handleEditClick a DataTable
       )}
-      {open && <Add slug="alquiler" columns={columns} setOpen={setOpen} />}
+
+      {openAddModal && <Add slug="alquiler" columns={columns} setOpen={setOpenAddModal} />}
+
+      {isUpdateModalOpen && selectedItem && (
+        <Update
+          slug="alquiler"
+          columns={columns}
+          setOpen={setUpdateModalOpen}
+          selectedItem={selectedItem}
+        />
+      )}
     </div>
   );
 };
