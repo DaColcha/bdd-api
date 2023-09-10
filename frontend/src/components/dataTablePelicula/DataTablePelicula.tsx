@@ -18,8 +18,8 @@ const DataTablePelicula = (props: Props) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: string) => {
-      const [cod_pelicula] = id.split("-");
-      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${cod_pelicula}`, {
+      const [cod_peli] = id.split("-");
+      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${cod_peli}`, {
         method: "delete",
       });
     },
