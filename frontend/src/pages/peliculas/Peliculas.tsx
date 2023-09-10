@@ -1,12 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
-// import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
+// import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 import "./peliculas.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
 import Update from "../../components/update/Update";
-import DataTableAlquiler from "../../components/dataTablePelicula/DataTablePelicula";
+import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 
 const columns: GridColDef[] = [
   {
@@ -66,36 +66,47 @@ const Peliculas = () => {
   
   return (
     <div className="peliculas">
-      <div className="peliculas__header">
+      <div className="info">
         <h1>Peliculas</h1>
-        <button onClick={() => setOpenAddModal(true)}>Agregar</button>
+        <button onClick={() => setOpenAddModal(true)}>Añadir película</button>
       </div>
-      <div className="peliculas__table">
-        <DataTablePelicula
-          columns={[...columns, { ...actionColumn, renderCell: (params) => {
-            return (
-              <div className="action">
-                <div className="delete" onClick={() => handleEditClick(params.row)}>
-                  <img src="/delete.svg" alt="" />
-                </div>
-              </div>
-            );
-          }}]}
-          rows={data}
-          slug="pelicula"
-        />
-      </div>
+
+      {isLoading ? (
+        "Loading..."
+      ) : (
+      <DataTablePelicula
+        columns={columns}
+        rows={data}
+        handleEditClick={handleEditClick}
+      />
+      )}
+
       <Add
         open={openAddModal}
         setOpen={setOpenAddModal}
-        slug="pelicula"
+        type="pelicula"
+        columns={columns}
       />
-      <Update
-        open={isUpdateModalOpen}
-        setOpen={setUpdateModalOpen}
-        slug="pelicula"
-        item={selectedItem}
+
+      {isUpdateModalOpen && selectedItem && (
+      <Delete
+        open={isDeleteModalOpen}
+        setOpen={setDeleteModalOpen}
+        type="pelicula"
+        columns={columns}
+        selectedItem={selectedItem}
       />
+      )}
+
+      {isUpdateModalOpen && selectedItem && (
+        <Update
+          open={isUpdateModalOpen}
+          setOpen={setUpdateModalOpen}
+          type="pelicula"
+          columns={columns}
+          selectedItem={selectedItem}
+        />
+      )}
     </div>
   );
 };
