@@ -61,7 +61,10 @@ const Update = (props: Props) => {
                 <h1>Update {props.slug}</h1>
                 <form onSubmit={handleSubmit}>
                     {props.columns
-                        .filter((column) => column.field !== "fecha_inicio" && column.field !== "fecha_entrega")
+                        .filter((column) => 
+                        column.field !== "fecha_inicio" && 
+                        column.field !== "fecha_entrega" &&
+                        column.field !== "id")
                         .map((column) => (
                             <div className="item" key={column.field}>
                                 <label>{column.headerName}</label>
