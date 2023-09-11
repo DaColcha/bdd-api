@@ -4,7 +4,7 @@ import sql from 'mssql'
 export const getEjemplar_info = async (req, res) => {    
     const pool = await getConnection()
     const result = await pool.request()
-            .query('SELECT * fecha FROM Ejemplar_info')
+            .query('SELECT num_ejemplar as id, cod_pelicula, cod_agencia, ciudad FROM Ejemplar_info')
     return res.json(result.recordset)
 }
 

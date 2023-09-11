@@ -5,6 +5,8 @@ import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
+import Update from "../../components/update/updateAlquiler/Update";
+import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
 
 const columns: GridColDef[] = [
   {
@@ -45,10 +47,11 @@ const columns: GridColDef[] = [
   },
 ];
 
-const Reseñas = () => {
-  const [open, setOpen] = useState(false);
 
-  // TEST THE API
+const Reseñas = () => {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [isUpdateModalOpen, setUpdateModalOpen] = useState(false);
+  const [selectedItem, setSelectedItem] = useState<any>(null);
 
   const { isLoading, data } = useQuery({
     queryKey: ["allresenias"],
@@ -56,19 +59,35 @@ const Reseñas = () => {
       fetch("http://localhost:4000/glob-guster/resenia").then((res) => res.json()),
   });
 
+  const handleEditClick = (item: any) => {
+    // Abre el modal de actualización y pasa el elemento seleccionado
+    setSelectedItem(item);
+    setUpdateModalOpen(true);
+  };
+
   return (
     <div className="reseñas">
       <div className="info">
         <h1>Reseñas</h1>
-        <button onClick={() => setOpen(true)}>Agregar reseña</button>
+        <button onClick={() => setOpenAddModal(true)}>Agregar reseña</button>
       </div>
 
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTable slug="resenia" columns={columns} rows={data} />
+        <DataTableAlquiler slug="resenia" columns={columns} rows={data}  onEditClick={handleEditClick}/>
       )}
-      {open && <Add slug="resenia" columns={columns} setOpen={setOpen} />}
+      {openAddModal && <Add slug="resenia" columns={columns} setOpen={setOpenAddModal} />}
+        
+      {isUpdateModalOpen && selectedItem && (
+        <Update
+          slug="alquiler"
+          columns={columns}
+          setOpen={setUpdateModalOpen}
+          selectedItem={selectedItem}
+        />
+      )}
+      
     </div>
   );
 };

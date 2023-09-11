@@ -24,16 +24,12 @@ export const menu = [
         title: "Empleados",
         url: "/glob-guster/empleado"
       },{
-        id: 5,
-        title: "Ejemplares",
-        url: "/glob-guster/ejemplar"
-      },{
-        id:6,
+        id:5,
         title: "Ejemplar Info",
         url: "/glob-guster/ejemplar-info"
       },
       {
-        id: 7,
+        id: 6,
         title: "Ejemplar Conservación",
         url: "/glob-guster/ejemplar-conservacion"
       },

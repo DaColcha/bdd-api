@@ -11,34 +11,34 @@ import Update from "../../components/update/updateAlquiler/Update";
 
 const columns: GridColDef[] = [
   {
-    field: "cod_empleado",
+    field: "id",
     type: "number",
     headerName: "Cod. Empleado",
-    width: 75,
+    width: 125,
   },
   {
     field: "nombre",
     type: "string",
     headerName: "Nombre",
-    width: 75,
+    width: 100,
   },
   {
     field: "salario",
     type: "number", 
     headerName: "Salario",
-    width: 75,
+    width: 150,
   },
   {
     field: "cargo",
     type: "string",
     headerName: "Cargo Empleado",
-    width: 75,
+    width: 150,
   },
   {
     field: "cod_agencia",
     type: "number",
     headerName: "Cod. Agencia",
-    width: 75,
+    width: 100,
   },
   {
     field: "ciudad",
