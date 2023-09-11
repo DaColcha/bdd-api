@@ -51,7 +51,7 @@ export const createAlquiler = async (req, res) => {
   
 
   export const deleteAlquiler = async (req, res)=> {
-    const cod_alquiler = parseInt(req.params.id);
+    const cod_alquiler = parseInt(req.params.cod_alquiler);
     const ciudad = req.params.ciudad;
 
     const pool = await getConnection()
@@ -59,7 +59,7 @@ export const createAlquiler = async (req, res) => {
     await pool.request()
     .input('cod_alquiler', sql.Int, cod_alquiler)
     .input('ciudad', sql.VarChar, ciudad)
-    .query( 'set xact_abort on begin distributed transaction DELETE FROM Alquiler WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad) commit');
+    .query( 'set xact_abort on begin distributed transaction DELETE FROM Alquiler WHERE cod_alquiler = @cod_alquiler AND ciudad = @ciudad commit');
 
     return res.json(`Rent ${cod_alquiler}-${ciudad} deleted Successfully`);
   }

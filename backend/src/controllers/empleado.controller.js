@@ -49,7 +49,7 @@ export const updateEmpleado = async (req, res) => {
 
 
 export const deleteEmpleado = async (req, res) => {
-  const cod_empleado= parseInt(req.params.id);
+  const cod_empleado= parseInt(req.params.cod_empleado);
   const ciudad = req.params.ciudad;
   
   const pool = await getConnection()
