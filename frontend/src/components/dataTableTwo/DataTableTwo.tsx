@@ -16,6 +16,7 @@ const DataTableTwo = (props: Props) => {
   const mutation = useMutation({
     mutationFn: (deleteParam: string) => {
       const [id, ciudad] = deleteParam.split("-");
+      console.log(id, ciudad);
       return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}/${ciudad}`, {
         method: "delete",
       });

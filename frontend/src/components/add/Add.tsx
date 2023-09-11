@@ -58,7 +58,10 @@ const Add = (props: Props) => {
         <h1>Add new {props.slug}</h1>
         <form onSubmit={handleSubmit}>
           {props.columns
-            .filter((column) => column.field !== "fecha_inicio" && column.field !== "fecha_entrega")
+            .filter((column) => 
+            column.field !== "fecha_inicio" && 
+            column.field !== "fecha_entrega" &&
+            column.field !== "fecha" )
             .map((column) => (
               <div className="item">
                 <label>{column.headerName}</label>
