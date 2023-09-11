@@ -23,7 +23,7 @@ const DataTableEjemplar_Conservacion = (props: Props) => {
           {
             field: "action",
             headerName: "Update",
-            width: 200,
+            width: 75,
             renderCell: (params) => (
               <div className="action">
                 <div className='modify' onClick={() => props.onEditClick(params.row)}>

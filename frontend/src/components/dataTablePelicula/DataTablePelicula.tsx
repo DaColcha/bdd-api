@@ -38,7 +38,7 @@ const DataTablePelicula = (props: Props) => {
   const actionColumn: GridColDef = {
     field: "actionD",
     headerName: "Delete",
-    width: 200,
+    width: 75,
     renderCell: (params) => {
       return (
         <div className="action">
@@ -60,7 +60,7 @@ const DataTablePelicula = (props: Props) => {
           {
             field: "action",
             headerName: "Update",
-            width: 200,
+            width: 75,
             renderCell: (params) => (
               <div className="action">
                 <div className='modify' onClick={() => props.onEditClick(params.row)}>

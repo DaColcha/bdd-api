@@ -35,8 +35,12 @@ export const menu = [
         url: "/glob-guster/pelicula"
       },
 
+      {
+        id: 7,
+        title: "Empleados",
+        url: "/glob-guster/empleado"
+      },
     ],
   },
 ];
 
-//export const singleReseña = ;
