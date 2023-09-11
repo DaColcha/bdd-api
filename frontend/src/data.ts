@@ -21,13 +21,18 @@ export const menu = [
       },
       {
         id: 4,
-        title: "Ejemplar Info",
+        title: "Ejemplares Info",
         url: "/glob-guster/ejemplar-info"
       },
       {
         id: 5,
-        title: "Ejemplar Conservación",
+        title: "Ejemplares Conservación",
         url: "/glob-guster/ejemplar-conservacion"
+      },
+      {
+        id: 6,
+        title: "Películas",
+        url: "/glob-guster/pelicula"
       },
 
     ],

@@ -1,4 +1,4 @@
-import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import "./dataTablePelicula.scss";
 //import { Link } from "react-router-dom";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
@@ -18,8 +18,7 @@ const DataTablePelicula = (props: Props) => {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: (id: string) => {
-      const [cod_peli] = id.split("-");
-      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${cod_peli}`, {
+      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}`, {
         method: "delete",
       });
     },
@@ -28,7 +27,7 @@ const DataTablePelicula = (props: Props) => {
     },
   });
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     //delete the item
     let ID: string;
     ID = `${id}`;

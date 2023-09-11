@@ -5,26 +5,26 @@ import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
-import Update from "../../components/update/Update";
+import Update from "../../components/update/updatePelicula/Update";
 import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 
 const columns: GridColDef[] = [
   {
-    field: "cod_pelicula",
-    type: "number",
+    field: "id",
+    type: "string",
     headerName: "Cod. Pelicula",
     width: 75,
+  },
+  {
+    field: "cod_director",
+    type: "string",
+    headerName: "Cod. Director",
+    width: 150,
   },
   {
     field: "titulo",
     type: "string",
     headerName: "Título",
-    width: 150,
-  },
-  {
-    field: "cod_dir",
-    type: "number",
-    headerName: "Cod. Director",
     width: 150,
   },
   {
@@ -40,7 +40,7 @@ const columns: GridColDef[] = [
     width: 150,
   },
   {
-    field: "fecha_estreno",
+    field: "fecha",
     type: "string",
     headerName: "Fecha Estreno",
     width: 150,
@@ -67,19 +67,14 @@ const Peliculas = () => {
   return (
     <div className="peliculas">
       <div className="info">
-        <h1>Peliculas</h1>
+        <h1>Películas</h1>
         <button onClick={() => setOpenAddModal(true)}>Añadir Película</button>
       </div>
 
       {isLoading ? (
         "Loading..."
       ) : (
-      <DataTablePelicula
-        slug="pelicula"
-        columns={columns}
-        rows={data}
-        handleEditClick={handleEditClick}
-      />
+        <DataTablePelicula slug="pelicula" columns={columns} rows={data} onEditClick={handleEditClick}/>
       )}
 
       {openAddModal && <Add
@@ -87,15 +82,6 @@ const Peliculas = () => {
         setOpen={setOpenAddModal}
         columns={columns}
       />}
-
-      {isUpdateModalOpen && selectedItem && (
-      <Delete
-        slug="pelicula"
-        setOpen={setDeleteModalOpen}
-        columns={columns}
-        selectedItem={selectedItem}
-      />
-      )}
 
       {isUpdateModalOpen && selectedItem && (
         <Update
