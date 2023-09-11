@@ -34,26 +34,28 @@ export const createAlquiler = async (req, res) => {
   }
   
   export const updateAlquiler = async (req, res) => {  
-    const {cod_alquiler, cc_socio, num_ejemplar, cod_pelicula, ciudad} = req.body;
+    const {id, cc_socio, num_ejemplar, cod_pelicula, ciudad} = req.body;
     const pool = await getConnection()
 
     await pool
     .request()
-    .input('cod_alquiler', sql.Int, cod_alquiler)
+    .input('cod_alquiler', sql.Int, id)
     .input('cc_socio', sql.Char, cc_socio)
     .input('num_ejemplar', sql.Int, num_ejemplar)
     .input('cod_pelicula', sql.Char, cod_pelicula)
     .input('ciudad', sql.VarChar, ciudad)
     .query('set xact_abort on begin distributed transaction UPDATE Alquiler set cc_socio=@cc_socio, num_ejemplar=@num_ejemplar, cod_pelicula=@cod_pelicula WHERE (cod_alquiler = @cod_alquiler AND ciudad = @ciudad) commit');
   
-    return res.json(`Rent ${cod_alquiler} updated Successfully`)
+    return res.json(`Rent ${id} updated Successfully`)
   }
   
 
   export const deleteAlquiler = async (req, res)=> {
-    const cod_alquiler = parseInt(req.params.cod_alquiler);
+    const cod_alquiler = parseInt(req.params.id);
     const ciudad = req.params.ciudad;
+
     const pool = await getConnection()
+
     await pool.request()
     .input('cod_alquiler', sql.Int, cod_alquiler)
     .input('ciudad', sql.VarChar, ciudad)

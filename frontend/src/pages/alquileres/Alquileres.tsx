@@ -6,7 +6,7 @@ import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
 import Update from "../../components/update/updateAlquiler/Update";
-import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
+import DataTableTwo from "../../components/dataTableTwo/DataTableTwo";
 
 const columns: GridColDef[] = [
   {
@@ -92,7 +92,7 @@ const Alquileres = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTableAlquiler slug="alquiler" columns={columns} rows={data} onEditClick={handleEditClick}/> // Pasa la función handleEditClick a DataTable
+        <DataTableTwo slug="alquiler" columns={columns} rows={data} onEditClick={handleEditClick}/> // Pasa la función handleEditClick a DataTable
       )}
 
       {openAddModal && <Add slug="alquiler" columns={columns} setOpen={setOpenAddModal} />}

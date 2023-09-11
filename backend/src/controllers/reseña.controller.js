@@ -8,16 +8,6 @@ export const getReseña = async (req, res) => {
     return res.json(result.recordset)
 }
 
-export const getReseñabyId = async (req, res) => {    
-  const num = parseInt(req.params.num)
-    const pool = await getConnection()
-    await pool.request()
-    .input('num', sql.Int, num)
-    .query('SELECT num_reseña as id, cod_pelicula, cc_socio, descripcion, calificacion, fecha FROM Reseña WHERE num_reseña = @num');
-  return res.json(result.recordset)
-}
-
-
 export const createReseña = async (req, res) => {  
   const {id,cod_pelicula, cc_socio, descripcion, calificacion} = req.body;
   
@@ -39,22 +29,24 @@ export const createReseña = async (req, res) => {
 
   
   export const updateReseña = async (req, res) => {  
-    const {num_reseña, descripcion, calificacion} = req.body;
+    const {id, descripcion, calificacion} = req.body;
     const pool = await getConnection()
     
     await pool
       .request()
+      .input('num_reseña', sql.Int, id)
       .input('descripcion', sql.VarChar, descripcion)
       .input('calificacion', sql.Int, calificacion)
       .query('UPDATE Reseña set descripcion = @descripcion, calificacion= @calificacion , fecha = CONVERT(Date, GETDATE()) WHERE num_reseña = @num_reseña');
 
   
-    return res.json(`Reseña ${num_reseña} updated Successfully`)
+    return res.json(`Reseña ${id} updated Successfully`)
   }
   
 
   export const deleteReseña = async (req, res)=> {
     const num = parseInt(req.params.num)
+    
     const pool = await getConnection()
     await pool.request()
     .input('num', sql.Int, num)

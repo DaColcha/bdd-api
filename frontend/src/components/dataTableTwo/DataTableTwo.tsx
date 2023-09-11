@@ -1,9 +1,6 @@
-import { DataGrid, GridColDef, GridToolbar } from "@mui/x-data-grid";
-import "./dataTableEmpleado.scss";
-//import { Link } from "react-router-dom";
+import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import "./dataTableTwo.scss";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-
-// import ModifyAlquiler from "../modify/ModifyAlquiler";
 
 type Props = {
   columns: GridColDef[];
@@ -12,14 +9,14 @@ type Props = {
   onEditClick: (item: any) => void;
 };
 
-const DataTableEmpleado = (props: Props) => {
+const DataTableTwo = (props: Props) => {
 
 
   const queryClient = useQueryClient();
   const mutation = useMutation({
-    mutationFn: (id: string) => {
-      const [cod_empleado, cod_agencia, ciudad] = id.split("-");
-      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${cod_empleado}/${cod_agencia}/${ciudad}`, {
+    mutationFn: (deleteParam: string) => {
+      const [id, ciudad] = deleteParam.split("-");
+      return fetch(`http://localhost:4000/glob-guster/${props.slug}/${id}/${ciudad}`, {
         method: "delete",
       });
     },
@@ -28,11 +25,11 @@ const DataTableEmpleado = (props: Props) => {
     },
   });
 
-  const handleDelete = (cod_empleado: number, cod_agencia: number, ciudad: string) => {
+  const handleDelete = (id: number, ciudad: string) => {
     //delete the item
-    let ID: string;
-    ID = `${cod_empleado}-${cod_agencia}-${ciudad}`;
-    mutation.mutate(ID);
+    let deleteParam: string;
+    deleteParam= `${id}-${ciudad}`;
+    mutation.mutate(deleteParam);
     window.location.reload();
   };
 
@@ -43,7 +40,7 @@ const DataTableEmpleado = (props: Props) => {
     renderCell: (params) => {
       return (
         <div className="action">
-          <div className="delete" onClick={() => handleDelete(params.row.cod_empleado, params.row.cod_agencia,params.row.ciudad)}>
+          <div className="delete" onClick={() => handleDelete(params.row.id, params.row.ciudad)}>
             <img src="/delete.svg" alt="" />
           </div>
         </div>
@@ -77,4 +74,4 @@ const DataTableEmpleado = (props: Props) => {
   );
 };
 
-export default DataTableEmpleado;
+export default DataTableTwo;

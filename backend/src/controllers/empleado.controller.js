@@ -43,13 +43,13 @@ export const updateEmpleado = async (req, res) => {
 
   return res.json({
     message: `Employee ${nombre} updated Successfully`,
-    body: {cod_empleado, nombre, salario, cargo, cod_agencia, ciudad}
+    body: {cod_empleado, nombre, salario, cargo, ciudad}
   })
 }
 
 
 export const deleteEmpleado = async (req, res) => {
-  const cod_empleado= req.params.id;
+  const cod_empleado= parseInt(req.params.cod_e);
   const ciudad = req.params.ciudad;
   
   const pool = await getConnection()
@@ -59,5 +59,5 @@ export const deleteEmpleado = async (req, res) => {
     .input('ciudad', sql.VarChar, ciudad)
     .query('set xact_abort begin distributed transaction DELETE FROM Empleado WHERE (cod_empleado=@cod_empleado AND ciudad=@ciudad) commit');
   
-  return res.json(`Employee ${cod_empleado}-${cod_agencia} deleted Successfully`);
+  return res.json(`Employee ${cod_empleado} deleted Successfully`);
 }

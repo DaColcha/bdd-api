@@ -3,11 +3,9 @@ import { GridColDef } from "@mui/x-data-grid";
 import "./empleados.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
-
 import { useQuery } from "@tanstack/react-query";
-
-import DataTableEmpleado from "../../components/dataTableEmpleado/DataTableEmpleado";
 import Update from "../../components/update/updateAlquiler/Update";
+import DataTableTwo from "../../components/dataTableTwo/DataTableTwo";
 
 const columns: GridColDef[] = [
   {
@@ -54,7 +52,7 @@ const Empleados = () => {
   const [selectedItem, setSelectedItem] = useState<any>(null); // Almacena el elemento seleccionado para actualizar
 
   const { isLoading, data } = useQuery({
-    queryKey: ["allalquileres"],
+    queryKey: ["allempleados"],
     queryFn: () =>
       fetch("http://localhost:4000/glob-guster/empleado").then((res) => res.json()),
   });
@@ -75,14 +73,14 @@ const Empleados = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTableEmpleado slug="alquiler" columns={columns} rows={data} onEditClick={handleEditClick}/> // Pasa la función handleEditClick a DataTable
+        <DataTableTwo slug="empleado" columns={columns} rows={data} onEditClick={handleEditClick}/> // Pasa la función handleEditClick a DataTable
       )}
 
-      {openAddModal && <Add slug="alquiler" columns={columns} setOpen={setOpenAddModal} />}
+      {openAddModal && <Add slug="empleado" columns={columns} setOpen={setOpenAddModal} />}
 
       {isUpdateModalOpen && selectedItem && (
         <Update
-          slug="alquiler"
+          slug="empleado"
           columns={columns}
           setOpen={setUpdateModalOpen}
           selectedItem={selectedItem}

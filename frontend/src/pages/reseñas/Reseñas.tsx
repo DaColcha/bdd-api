@@ -1,12 +1,12 @@
 import { GridColDef } from "@mui/x-data-grid";
-import DataTable from "../../components/dataTable/DataTable";
 import "./reseñas.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
-import Update from "../../components/update/updateAlquiler/Update";
-import DataTableAlquiler from "../../components/dataTableAlquiler/DataTableAlquiler";
+
+import Update from "../../components/update/updateSocio/UpdateSocio";
+import DataTable from "../../components/dataTable/DataTable";
 
 const columns: GridColDef[] = [
   {
@@ -75,7 +75,7 @@ const Reseñas = () => {
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTableAlquiler slug="resenia" columns={columns} rows={data}  onEditClick={handleEditClick}/>
+        <DataTable slug="resenia" columns={columns} rows={data}  onEditClick={handleEditClick}/>
       )}
       {openAddModal && <Add slug="resenia" columns={columns} setOpen={setOpenAddModal} />}
         
