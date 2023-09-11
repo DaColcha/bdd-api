@@ -68,31 +68,30 @@ const Peliculas = () => {
     <div className="peliculas">
       <div className="info">
         <h1>Peliculas</h1>
-        <button onClick={() => setOpenAddModal(true)}>Añadir película</button>
+        <button onClick={() => setOpenAddModal(true)}>Añadir Película</button>
       </div>
 
       {isLoading ? (
         "Loading..."
       ) : (
       <DataTablePelicula
+        slug="pelicula"
         columns={columns}
         rows={data}
         handleEditClick={handleEditClick}
       />
       )}
 
-      <Add
-        open={openAddModal}
+      {openAddModal && <Add
+        slug = "pelicula"
         setOpen={setOpenAddModal}
-        type="pelicula"
         columns={columns}
-      />
+      />}
 
       {isUpdateModalOpen && selectedItem && (
       <Delete
-        open={isDeleteModalOpen}
+        slug="pelicula"
         setOpen={setDeleteModalOpen}
-        type="pelicula"
         columns={columns}
         selectedItem={selectedItem}
       />
@@ -100,9 +99,8 @@ const Peliculas = () => {
 
       {isUpdateModalOpen && selectedItem && (
         <Update
-          open={isUpdateModalOpen}
+          slug="pelicula"
           setOpen={setUpdateModalOpen}
-          type="pelicula"
           columns={columns}
           selectedItem={selectedItem}
         />
