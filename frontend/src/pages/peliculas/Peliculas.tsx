@@ -2,7 +2,7 @@ import { GridColDef } from "@mui/x-data-grid";
 // import DataTablePelicula from "../../components/dataTablePelicula/DataTablePelicula";
 import "./peliculas.scss";
 import { useState } from "react";
-import Add from "../../components/add/Add";
+import Add from "../../components/add/AddPeli";
 
 import { useQuery } from "@tanstack/react-query";
 import Update from "../../components/update/updatePelicula/Update";
@@ -19,19 +19,19 @@ const columns: GridColDef[] = [
     field: "cod_director",
     type: "string",
     headerName: "Cod. Director",
-    width: 150,
+    width: 125,
   },
   {
     field: "titulo",
     type: "string",
     headerName: "Título",
-    width: 150,
+    width: 200,
   },
   {
     field: "nacionalidad",
     type: "string",
     headerName: "Nacionalidad",
-    width: 150,
+    width: 125,
   },
   {
     field: "productora",

@@ -33,6 +33,39 @@ const columns: GridColDef[] = [
   },
 ];
 
+const fullColumns: GridColDef[] = [
+  {
+    field: "id",
+    type: "number",
+    headerName: "Num. Ejemplar",
+    width: 75,
+  },
+  {
+    field: "cod_pelicula",
+    type: "string",
+    headerName: "Película",
+    width: 75,
+  },
+  {
+    field: "cod_agencia",
+    type: "number",
+    headerName: "Agencia",
+    width: 75,
+  },
+  {
+    field: "ciudad",
+    type: "string",
+    headerName: "Ciudad",
+    width: 150,
+  },
+  {
+    field: "conservacion",
+    type: "string",
+    headerName: "Conservación",
+    width: 150,
+  },
+];
+
 const Ejemplares_Info = () => {
   const [openAddModal, setOpenAddModal] = useState(false);
   
@@ -55,7 +88,7 @@ const Ejemplares_Info = () => {
         <DataTableEjemplar_Info slug="ejemplar" columns={columns} rows={data}/>
       )}
       
-      {openAddModal && <Add slug="ejemplar" columns={columns} setOpen={setOpenAddModal} />}
+      {openAddModal && <Add slug="ejemplar-info" columns={fullColumns} setOpen={setOpenAddModal} />}
       
     </div>
   );

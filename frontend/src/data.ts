@@ -1,46 +1,43 @@
 export const menu = [
   {
     id: 2,
-    title: "lists",
+    title: "",
     listItems: [
-      
       {
         id: 1,
-        title: "Reseñas",
-        url: "/glob-guster/resenia"
-      },
-      {
+        title: "Empleados",
+        url: "/glob-guster/empleado"
+      },{
         id: 2,
-        title: "Alquileres",
-        url: "/glob-guster/alquiler"
-      },
-      {
+        title: "Películas",
+        url: "/glob-guster/pelicula"
+      },{
         id: 3,
-        title: "Socios",
-        url: "/glob-guster/socio"
-      },
-      {
-        id: 4,
         title: "Ejemplares Info",
         url: "/glob-guster/ejemplar-info"
       },
       {
-        id: 5,
+        id: 4,
         title: "Ejemplares Conservación",
         url: "/glob-guster/ejemplar-conservacion"
       },
       {
-        id: 6,
-        title: "Películas",
-        url: "/glob-guster/pelicula"
+        id: 5,
+        title: "Socios",
+        url: "/glob-guster/socio"
       },
-
+      
+      {
+        id: 6,
+        title: "Alquileres",
+        url: "/glob-guster/alquiler"
+      },
       {
         id: 7,
-        title: "Empleados",
-        url: "/glob-guster/empleado"
-      },
+        title: "Reseñas",
+        url: "/glob-guster/resenia"
+      },     
+      
     ],
   },
 ];
-
