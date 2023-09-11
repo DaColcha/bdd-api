@@ -10,7 +10,6 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Reseñas from "./pages/reseñas/Reseñas";
 import Alquileres from "./pages/alquileres/Alquileres";
 import Socios from "./pages/socios/Socios";
-import Empleados from "./pages/empleados/Empleados";
 
 const queryClient = new QueryClient();
 
@@ -53,6 +52,14 @@ function App() {
         },{
           path: "/glob-guster/empleado",
           element: <Empleados />,
+        },
+        {
+          path: "/glob-guster/ejemplar-info",
+          element: <Ejemplares_Info />,
+        },
+        {
+          path: "/glob-guster/ejemplar-conservacion",
+          element: <Ejemplares_Conservacion />,
         },
         
       ],

@@ -1,6 +1,6 @@
 import { GridColDef } from "@mui/x-data-grid";
-import DataTableEjemplar from "../../components/dataTableEjemplar/DataTableEjemplar";
-import "./ejemplares.scss";
+import DataTableEjemplar_Info from "../../components/dataTableEjemplar_info/DataTableEjemplar_Info";
+import "./ejemplares_info.scss";
 import { useState } from "react";
 import Add from "../../components/add/Add";
 
@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const columns: GridColDef[] = [
   {
-    field: "num_ejemplar",
+    field: "id",
     type: "number",
     headerName: "Num. Ejemplar",
     width: 75,
@@ -26,12 +26,6 @@ const columns: GridColDef[] = [
     width: 75,
   },
   {
-    field: "conservacion",
-    type: "string",
-    headerName: "Conservacion",
-    width: 75,
-  },
-  {
     field: "ciudad",
     type: "string",
     headerName: "Ciudad",
@@ -39,32 +33,32 @@ const columns: GridColDef[] = [
   },
 ];
 
-const Ejemplares = () => {
-  const [open, setOpen] = useState(false);
-
-  // TEST THE API
-
+const Ejemplares_Info = () => {
+  const [openAddModal, setOpenAddModal] = useState(false);
+  
   const { isLoading, data } = useQuery({
     queryKey: ["allejemplares"],
     queryFn: () =>
-      fetch("http://localhost:4000/glob-guster/ejemplar").then((res) => res.json()),
+      fetch("http://localhost:4000/glob-guster/ejemplar-info").then((res) => res.json()),
   });
 
   return (
     <div className="ejemplares">
       <div className="info">
-        <h1>Ejemplares</h1>
-        <button onClick={() => setOpen(true)}>Ejemplares de Peliculas</button>
+        <h1>Info Ejemplares</h1>
+        <button onClick={() => setOpenAddModal(true)}>Nuevo Ejemplar</button>
       </div>
 
       {isLoading ? (
         "Loading..."
       ) : (
-        <DataTableEjemplar slug="ejemplar" columns={columns} rows={data} />
+        <DataTableEjemplar_Info slug="ejemplar" columns={columns} rows={data}/>
       )}
-      {open && <Add slug="ejemplar" columns={columns} setOpen={setOpen} />}
+      
+      {openAddModal && <Add slug="ejemplar" columns={columns} setOpen={setOpenAddModal} />}
+      
     </div>
   );
 };
 
-export default Ejemplares;
+export default Ejemplares_Info;
