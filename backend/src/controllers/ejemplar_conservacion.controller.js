@@ -9,12 +9,12 @@ export const getEjemplar_Conservacion = async (req, res) => {
 }
 
 export const createEjemplar_Conservacion = async (req, res) => {
-    const { num_ejemplar, cod_pelicula, conservacion } = req.body;
+    const { id, cod_pelicula, conservacion } = req.body;
     const pool = await getConnection()
 
     await pool
         .request()
-        .input('num_ejemplar', sql.Int, num_ejemplar)
+        .input('num_ejemplar', sql.Int, id)
         .input('cod_pelicula', sql.Char, cod_pelicula)
         .input('conservacion', sql.Char, conservacion)
         .query('INSERT INTO Ejemplar_Conservacion (num_ejemplar, cod_pelicula, conservacion) VALUES (@num_ejemplar, @cod_pelicula, @conservacion)');
@@ -52,7 +52,8 @@ export const updateEjemplar_Conservacion = async (req, res) => {
 }
 
 export const deleteEjemplar_Conservacion = async (req, res) => {
-    const {num_ejemplar, cod_pelicula} = req.body;
+    const num_ejemplar = req.params.num_ejemplar;
+    const cod_pelicula = req.params.cod_pelicula;
 
     await pool
         .request()

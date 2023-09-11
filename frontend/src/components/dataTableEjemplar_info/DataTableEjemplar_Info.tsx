@@ -54,7 +54,7 @@ const DataTableEjemplar_Info = (props: Props) => {
     renderCell: (params) => {
       return (
         <div className="action">
-          <div className="delete" onClick={() => handleDelete(params.row.num_ejemplar, params.row.cod_pelicula, params.row.ciudad)}>
+          <div className="delete" onClick={() => handleDelete(params.row.id, params.row.cod_pelicula, params.row.ciudad)}>
             <img src="/delete.svg" alt="" />
           </div>
         </div>

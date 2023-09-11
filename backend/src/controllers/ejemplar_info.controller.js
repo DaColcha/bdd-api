@@ -9,13 +9,13 @@ export const getEjemplar_info = async (req, res) => {
 }
 
 export const createEjemplar_info = async (req, res) => {  
-    const {num_ejemplar, cod_pelicula, cod_agencia, ciudad} = req.body;
+    const {id, cod_pelicula, cod_agencia, ciudad} = req.body;
     const pool = await getConnection()
    
     
   await pool
     .request()
-    .input('num_ejemplar', sql.Int, num_ejemplar)
+    .input('num_ejemplar', sql.Int, id)
     .input('cod_pelicula', sql.Char, cod_pelicula)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('ciudad', sql.VarChar, ciudad)
@@ -26,7 +26,7 @@ export const createEjemplar_info = async (req, res) => {
       message: 'Ejemplar Created successfully',
       body: {
         user: {
-          num_ejemplar, cod_pelicula, cod_agencia
+          id, cod_pelicula, cod_agencia
         }
       }
     })
