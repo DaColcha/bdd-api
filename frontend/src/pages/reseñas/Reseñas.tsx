@@ -81,7 +81,7 @@ const Reseñas = () => {
         
       {isUpdateModalOpen && selectedItem && (
         <Update
-          slug="alquiler"
+          slug="resenia"
           columns={columns}
           setOpen={setUpdateModalOpen}
           selectedItem={selectedItem}

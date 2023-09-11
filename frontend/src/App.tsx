@@ -60,10 +60,10 @@ function App() {
           path: "/glob-guster/ejemplar-info",
           element: <Ejemplares_Info />,
         },
-        // {
-        //   path: "/glob-guster/ejemplar-conservacion",
-        //   element: <Ejemplares_Conservacion />,
-        // },
+        {
+          path: "/glob-guster/ejemplar-conservacion",
+          element: <Ejemplares_Conservacion />,
+        },
         
       ],
     },
