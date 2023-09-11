@@ -21,17 +21,24 @@ export const menu = [
       },
       {
         id: 4,
-        title: "Empleados",
-        url: "/glob-guster/empleado"
-      },{
-        id:5,
-        title: "Ejemplar Info",
+        title: "Ejemplares Info",
         url: "/glob-guster/ejemplar-info"
       },
       {
-        id: 6,
-        title: "Ejemplar Conservación",
+        id: 5,
+        title: "Ejemplares Conservación",
         url: "/glob-guster/ejemplar-conservacion"
+      },
+      {
+        id: 6,
+        title: "Películas",
+        url: "/glob-guster/pelicula"
+      },
+
+      {
+        id: 7,
+        title: "Empleados",
+        url: "/glob-guster/empleado"
       },
     ],
   },

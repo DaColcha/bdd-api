@@ -13,6 +13,7 @@ import Socios from "./pages/socios/Socios";
 import Empleados from "./pages/empleados/Empleados";
 import Ejemplares_Info from "./pages/ejemplares_info/Ejemplares_Info";
 import Ejemplares_Conservacion from "./pages/ejemplares_conservacion/Ejemplares_Conservacion";
+import Peliculas from "./pages/peliculas/Peliculas";
 
 const queryClient = new QueryClient();
 
@@ -63,6 +64,10 @@ function App() {
         {
           path: "/glob-guster/ejemplar-conservacion",
           element: <Ejemplares_Conservacion />,
+        },
+        {
+          path: "/glob-guster/pelicula",
+          element: <Peliculas />,
         },
         
       ],
