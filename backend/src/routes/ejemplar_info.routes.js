@@ -8,7 +8,7 @@ const useRoutesEjemplar_info = (app) => {
 
     router.get('/ejemplar-info', getEjemplar_info)
     router.post('/ejemplar-info', createEjemplar_info)
-    router.delete('/ejemplar-info/:num', deleteEjemplar_info)    
+    router.delete('/ejemplar-info/:num_ejemplar/:cod_pelicula/:ciudad', deleteEjemplar_info)    
 }
 
 export default useRoutesEjemplar_info

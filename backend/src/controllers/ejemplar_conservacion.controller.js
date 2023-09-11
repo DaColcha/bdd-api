@@ -4,7 +4,7 @@ import sql from 'mssql'
 export const getEjemplar_Conservacion = async (req, res) => {
     const pool = await getConnection()
     const result = await pool.request()
-        .query('SELECT * fecha FROM Ejemplar_Conservacion')
+        .query('SELECT num_ejemplar as id, cod_pelicula, conservacion FROM Ejemplar_Conservacion')
     return res.json(result.recordset)
 }
 
@@ -32,12 +32,11 @@ export const createEjemplar_Conservacion = async (req, res) => {
 }
 
 export const updateEjemplar_Conservacion = async (req, res) => {
-    const { num_ejemplar, cod_pelicula, conservacion } = req.body;
-    
+    const { id, cod_pelicula, conservacion } = req.body;
     const pool = await getConnection()
     await pool
         .request()
-        .input('num_ejemplar', sql.Int, num_ejemplar)
+        .input('num_ejemplar', sql.Int, id)
         .input('cod_pelicula', sql.Char, cod_pelicula)
         .input('conservacion', sql.Char, conservacion)
         .query('UPDATE Ejemplar_Conservacion set conservacion=@conservacion WHERE (num_ejemplar=@num_ejemplar AND cod_pelicula=@cod_pelicula)');
@@ -46,7 +45,7 @@ export const updateEjemplar_Conservacion = async (req, res) => {
         message: 'Ejemplar_Conservacion Updated successfully',
         body: {
             user: {
-                num_ejemplar, cod_pelicula, conservacion
+                id, cod_pelicula, conservacion
             }
         }
     })

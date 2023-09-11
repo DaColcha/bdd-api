@@ -1,5 +1,5 @@
 import Router from 'express'
-import { getEjemplar_Conservacion, createEjemplar_Conservacion, updateEjemplar_Conservacion, deleteEjemplar_Conservacion } from '../controllers/ejemplar_conservacion.controller' 
+import { getEjemplar_Conservacion, createEjemplar_Conservacion, updateEjemplar_Conservacion, deleteEjemplar_Conservacion } from '../controllers/ejemplar_conservacion.controller.js' 
 
 const router = Router()
 

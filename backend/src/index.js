@@ -11,6 +11,7 @@ import useRoutesActor from './routes/actor.routes.js';
 import useRoutesSocio from './routes/socio.routes.js';
 import useRoutesEmpleado from './routes/empleado.routes.js';
 import useRoutesEjemplar_info from './routes/ejemplar_info.routes.js';
+import useRoutesEjemplar_Conservacion from './routes/ejemplar_conservacion.routes.js';
 
 const app = express()
 
@@ -29,6 +30,7 @@ useRoutesActor(app)
 useRoutesSocio(app)
 useRoutesEmpleado(app)
 useRoutesEjemplar_info(app)
+useRoutesEjemplar_Conservacion(app)
 
 app.listen(4000)
 console.log('Server running on port', 4000);

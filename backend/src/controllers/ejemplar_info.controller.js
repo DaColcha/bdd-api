@@ -1,4 +1,5 @@
 import getConnection from '../database.js'
+import sql from 'mssql'
 
 export const getEjemplar_info = async (req, res) => {    
     const pool = await getConnection()
@@ -8,7 +9,7 @@ export const getEjemplar_info = async (req, res) => {
 }
 
 export const createEjemplar_info = async (req, res) => {  
-    const {num_ejemplar, cod_pelicula, cod_agencia} = req.body;
+    const {num_ejemplar, cod_pelicula, cod_agencia, ciudad} = req.body;
     const pool = await getConnection()
    
     
@@ -16,8 +17,9 @@ export const createEjemplar_info = async (req, res) => {
     .request()
     .input('num_ejemplar', sql.Int, num_ejemplar)
     .input('cod_pelicula', sql.Char, cod_pelicula)
-    .input('cod_agencia', sql.int, cod_agencia)
-    .query('set xact_abort on begin distributed transaction INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, \'guayaquil\') commit transaction');
+    .input('cod_agencia', sql.Int, cod_agencia)
+    .input('ciudad', sql.VarChar, ciudad)
+    .query('set xact_abort on begin distributed transaction INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, @ciudad) commit transaction');
 
 
     return res.json({
@@ -32,12 +34,16 @@ export const createEjemplar_info = async (req, res) => {
 }
   
 export const deleteEjemplar_info = async (req, res)=> {
-  const num= parseInt(req.params.num);
+  const {num_ejemplar, cod_pelicula, ciudad} = req.body;
+  const pool = await getConnection()
 
   await pool
-    .query('begin distributed transaction')
-    .query('DELETE FROM Ejemplar_info WHERE num = $1 and ciudad = \'guayaquil\'', [num])
+    .request()
+    .input('num_ejemplar', sql.Int, num_ejemplar)
+    .input('cod_pelicula', sql.Char, cod_pelicula)
+    .input('ciudad', sql.VarChar, ciudad)
+    .query('set xact_abort on begin distributed transaction DELETE FROM Ejemplar_info WHERE (num_ejemplar=@num_ejemplar AND cod_pelicula=@cod_pelicula AND ciudad=@ciudad) commit transaction')
 
-  return res.json(`Ejemplar ${num} deleted Successfully`);
+  return res.json(`Ejemplar ${num_ejemplar} deleted Successfully`);
 
 }
