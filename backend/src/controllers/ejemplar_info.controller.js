@@ -9,9 +9,8 @@ export const getEjemplar_info = async (req, res) => {
 }
 
 export const createEjemplar_info = async (req, res) => {  
-    const {id, cod_pelicula, cod_agencia, ciudad} = req.body;
-    const pool = await getConnection()
-   
+  const {id, cod_pelicula, cod_agencia, ciudad, conservacion} = req.body;
+  const pool = await getConnection()
     
   await pool
     .request()
@@ -19,7 +18,8 @@ export const createEjemplar_info = async (req, res) => {
     .input('cod_pelicula', sql.Char, cod_pelicula)
     .input('cod_agencia', sql.Int, cod_agencia)
     .input('ciudad', sql.VarChar, ciudad)
-    .query('set xact_abort on begin distributed transaction INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, @ciudad) commit transaction');
+    .input('conservacion', sql.Char, conservacion)
+    .query('INSERT INTO Ejemplar_Conservacion (num_ejemplar, cod_pelicula, conservacion) VALUES (@num_ejemplar, @cod_pelicula, @conservacion) set xact_abort on begin distributed transaction INSERT INTO Ejemplar_info (num_ejemplar, cod_pelicula, cod_agencia, ciudad) VALUES (@num_ejemplar, @cod_pelicula, @cod_agencia, @ciudad) commit transaction');
 
 
     return res.json({
@@ -34,7 +34,9 @@ export const createEjemplar_info = async (req, res) => {
 }
   
 export const deleteEjemplar_info = async (req, res)=> {
-  const {num_ejemplar, cod_pelicula, ciudad} = req.body;
+  const num_ejemplar = req.params.num_ejemplar;
+  const cod_pelicula = req.params.cod_pelicula;
+  const ciudad = req.params.ciudad;
   const pool = await getConnection()
 
   await pool

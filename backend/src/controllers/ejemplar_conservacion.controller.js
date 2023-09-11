@@ -54,6 +54,7 @@ export const updateEjemplar_Conservacion = async (req, res) => {
 export const deleteEjemplar_Conservacion = async (req, res) => {
     const num_ejemplar = req.params.num_ejemplar;
     const cod_pelicula = req.params.cod_pelicula;
+    const pool = await getConnection()
 
     await pool
         .request()

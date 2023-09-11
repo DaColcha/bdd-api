@@ -11,7 +11,6 @@ export const getPelicula = async (req, res) => {
 export const createPelicula = async (req, res) => {
   const {id, cod_director, titulo, nacionalidad, productora, fecha} = req.body;
   const pool = await getConnection()
-
   await pool
     .request()
     .input('cod_peli', sql.Char, id)
@@ -19,8 +18,8 @@ export const createPelicula = async (req, res) => {
     .input('cod_dir', sql.Char, cod_director)
     .input('nacionalidad', sql.VarChar, nacionalidad)
     .input('productora', sql.VarChar, productora)
-    .input('fecha_estreno', sql.Date, fecha)
-    .query('INSERT INTO Pelicula (cod_pelicula, cod_director, titulo, nacionalidad, productora, fecha) VALUES (@cod_peli, @cod_dir, @titulo, @nacionalidad, @productora, @fecha_estreno)');
+    .input('fecha', sql.Date, fecha)
+    .query('INSERT INTO Pelicula (cod_pelicula, cod_director, titulo, nacionalidad, productora, fecha) VALUES (@cod_peli, @cod_dir, @titulo, @nacionalidad, @productora, @fecha)');
 
   return res.json({
     message: 'Pelicula Created successfully',
@@ -48,7 +47,7 @@ export const updatePelicula = async (req, res) => {
 }
 
 export const deletePelicula = async (req, res)=> {
-  const {id} = req.body;
+  const id = req.params.cod_peli;
   const pool = await getConnection()
     
   await pool
