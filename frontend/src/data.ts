@@ -18,9 +18,16 @@ export const menu = [
         title: "Socios",
         url: "/glob-guster/socio"
       },
-      
+      {
+        id: 4,
+        title: "Empleados",
+        url: "/glob-guster/empleado"
+      },{
+        id: 5,
+        title: "Ejemplares",
+        url: "/glob-guster/ejemplar"
+      },
     ],
   },
 ];
 
-//export const singleReseña = ;

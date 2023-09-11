@@ -5,8 +5,9 @@ import { useState } from "react";
 import Add from "../../components/add/Add";
 
 import { useQuery } from "@tanstack/react-query";
-import Update from "../../components/update/Update";
+
 import DataTableEmpleado from "../../components/dataTableEmpleado/DataTableEmpleado";
+import Update from "../../components/update/updateAlquiler/Update";
 
 const columns: GridColDef[] = [
   {
@@ -23,7 +24,7 @@ const columns: GridColDef[] = [
   },
   {
     field: "salario",
-    type: "number", //o double ?
+    type: "number", 
     headerName: "Salario",
     width: 75,
   },
@@ -55,7 +56,7 @@ const Empleados = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["allalquileres"],
     queryFn: () =>
-      fetch("http://localhost:4000/glob-guster/alquiler").then((res) => res.json()),
+      fetch("http://localhost:4000/glob-guster/empleado").then((res) => res.json()),
   });
 
   const handleEditClick = (item: any) => {

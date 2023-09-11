@@ -5,7 +5,8 @@ const dbSettings = {
     password: 'P@ssw0rd',
     server: 'DESKTOP-QBB9M7S\\MSSQLSERVER2',
     //server:'COLCHAD\\MSSQLSERVER16',
-    database: 'globguster_DMQ', 
+    //database: 'globguster_GYE', 
+    database: 'globguster_DMQ',
     options: {
         encrypt: true,
         trustServerCertificate: true
